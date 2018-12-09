@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import LeftPanel from '../common/LeftPanel/LeftPanel';
 import MainPanel from '../common/MainPanel/MainPanel';
+import Header from '../common/Header/Header';
 
 import './App.scss';
 
@@ -12,7 +13,7 @@ class App extends Component {
 				<div className="row">
 					<LeftPanel/>
 					<MainPanel>
-						
+						<Header/>
 					</MainPanel>
 				</div>
 			</div>
