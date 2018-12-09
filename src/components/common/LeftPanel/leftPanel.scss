@@ -5,4 +5,15 @@
     height: 100vh;
     min-height: 200px;
     background-color: $left-panel-bg-color;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .site-logo {
+        height: $site-logo-container-heihgt;
+    }
+    .bottom-nav {
+        height: 100px;
+    }
 }
