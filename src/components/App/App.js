@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.scss';
 
 class App extends Component {
-    render() {
+	render() {
 		return (
 			<>
 				Hello
 			</>
 		);
-    }
+	}
 }
 
 export default App;
