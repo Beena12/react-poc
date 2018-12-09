@@ -1,0 +1,8 @@
+@import './../variables.scss';
+
+.left-panel {
+    width: $left-panel-width;
+    height: 100vh;
+    min-height: 200px;
+    background-color: $left-panel-bg-color;
+}

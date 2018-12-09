@@ -8,7 +8,7 @@ import reducer from './reducers/index';
 import App from './components/App/App';
 
 import * as serviceWorker from './serviceWorker';
-import './index.css';
+import './index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
