@@ -6,7 +6,7 @@ export default function Header() {
     return (
         <div className="header">
             <div className="customer-name">
-                
+
             </div>
             <div className="searchbox-container">
 
@@ -14,8 +14,8 @@ export default function Header() {
             <div className="avatar-container">
                 <UserAvatar 
                     size="50" 
-                    name="User Name" 
-                    src="https://pbs.twimg.com/profile_images/429442426038538240/6Ac9kykG_400x400.jpeg"
+                    name="Dan Abramov" 
+                    src="https://pbs.twimg.com/profile_images/906557353549598720/oapgW_Fp_bigger.jpg"
                 />
             </div>
         </div>

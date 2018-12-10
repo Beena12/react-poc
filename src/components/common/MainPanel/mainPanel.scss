@@ -1,5 +1,5 @@
 @import './../variables.scss';
 
 .main-panel {
-    width: calc(100vw - #{$left-panel-width});
+    width: calc(100% - #{$left-panel-width});
 }
