@@ -3,4 +3,13 @@
 .orders-table-wrapper {
     height: calc(100vh - #{$header-height});
     border-right: 1px solid #d6d4d4;
+    
+    .sort-section {
+        height: 100px;
+        padding: 5px;
+        
+        .sort-dropdown {
+            width: 150px;
+        }
+    }
 }
