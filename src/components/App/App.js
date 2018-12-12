@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import OrdersWrapper from '../Orders/OrdersWrapper';
+import OrdersPageWrapper from '../Orders/OrdersPageWrapper';
 
 import LeftPanel from '../common/LeftPanel/LeftPanel';
 import MainPanel from '../common/MainPanel/MainPanel';
@@ -18,7 +18,7 @@ class App extends Component {
 					<MainPanel>
 						<Header/>
 						<Content>
-							<OrdersWrapper/>
+							<OrdersPageWrapper/>
 						</Content>
 					</MainPanel>
 				</div>

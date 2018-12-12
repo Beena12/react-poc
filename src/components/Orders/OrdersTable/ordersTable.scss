@@ -1,0 +1,6 @@
+@import './../../common/variables.scss';
+
+.orders-table-wrapper {
+    height: calc(100vh - #{$header-height});
+    border-right: 1px solid #d6d4d4;
+}
