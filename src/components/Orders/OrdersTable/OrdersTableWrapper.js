@@ -29,7 +29,9 @@ export default class OrdersTableWrapper extends Component {
                         />
                     </div>
                 </div>
-
+                <div className="orders-table">
+                    
+                </div>
             </div>
         );
     }
