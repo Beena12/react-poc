@@ -3,6 +3,8 @@ import { Row, Col } from 'reactstrap';
 
 import OrdersTableWrapper from './OrdersTable/OrdersTableWrapper';
 
+import './orderPage.scss';
+
 export default function OrdersPageWrapper() {
     return (
         <Row noGutters={true}>
