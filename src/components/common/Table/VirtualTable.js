@@ -20,7 +20,7 @@ export default function VirtualTable( props ) {
             width           = { width }
             height          = { height }
             rowHeight       = { 40 }
-            headerHeight    = { 50 }
+            headerHeight    = { 40 }
             rowCount        = { data.length }
             noRowsRenderer  = { noRowsRenderer }
             rowGetter       = {({ index }) => data[index]}
