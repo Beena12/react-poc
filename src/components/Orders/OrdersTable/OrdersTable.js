@@ -25,6 +25,7 @@ class OrdersTable extends Component {
                 height = { height }
                 noRowsRenderer = { this.noRowsRenderer }
                 headerRowClass = "order-table-header"
+                evenRowClass = "order-table-even-row"
             />
         );
     }

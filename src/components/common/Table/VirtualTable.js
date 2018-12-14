@@ -4,13 +4,23 @@ import { Column } from "react-virtualized";
 import AutoSizedTable from './AutoSizedTable';
 
 export default function VirtualTable( props ) {
-    const { columns, data, noRowsRenderer, height, width, headerRowClass } = props;
+    const { 
+            columns, 
+            data, 
+            noRowsRenderer, 
+            height, 
+            width, 
+            headerRowClass, 
+            evenRowClass, 
+            oddRowClass 
+        } = props;
 
     const getRowClassName = ( row ) => {
-        if(row.index === -1){
+        const { index } = row;
+        if( index === -1){
             return headerRowClass;
         } else {
-            return '';
+            return index % 2 === 0 ? evenRowClass : oddRowClass;
         }
     }
 
