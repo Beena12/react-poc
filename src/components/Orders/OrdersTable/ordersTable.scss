@@ -15,5 +15,10 @@
 
     .orders-table {
         height: calc(100vh - #{$header-height} - 100px);
+
+        .order-table-header {
+            border: 1px solid #e4e4e4;
+            background-color: #fafafa;
+        }
     }
 }

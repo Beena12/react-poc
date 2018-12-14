@@ -22,6 +22,7 @@ export default class OrdersTable extends Component {
                 width = { width }
                 height = { height }
                 noRowsRenderer = { this.noRowsRenderer }
+                headerRowClass = "order-table-header"
             />
         );
     }

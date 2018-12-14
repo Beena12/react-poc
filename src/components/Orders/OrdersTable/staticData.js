@@ -75,7 +75,7 @@ export const ordersTableColumns = [
     {
         key            : "is_shipped",
         label          : "Shipped",
-        width          : 0.1,
+        widthFactor    : 0.1,
         headerRenderer : headerRenderer,
         cellRenderer   : cellRenderer
     }
