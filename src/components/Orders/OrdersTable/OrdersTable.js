@@ -7,7 +7,7 @@ import { ordersTableColumns } from "./staticData";
 export default class OrdersTable extends Component {
     noRowsRenderer = () => {
         return (
-            <div className="d-flex justify-content-center">
+            <div className="d-flex align-items-center justify-content-center h-100">
                 No Orders Found.
             </div>
         );
