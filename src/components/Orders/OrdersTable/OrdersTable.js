@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
+
 import VirtualTable from "./../../common/Table/VirtualTable";
 
 import { ordersTableColumns } from "./staticData";
 
 
-export default class OrdersTable extends Component {
+class OrdersTable extends Component {
     noRowsRenderer = () => {
         return (
             <div className="d-flex align-items-center justify-content-center h-100">
@@ -14,11 +16,11 @@ export default class OrdersTable extends Component {
     }
     
     render() {
-        const { height, width } = this.props;
+        const { height, width, orders } = this.props;
         return (
             <VirtualTable
                 columns = { ordersTableColumns }
-                data = {[]}
+                data = { orders }
                 width = { width }
                 height = { height }
                 noRowsRenderer = { this.noRowsRenderer }
@@ -27,3 +29,13 @@ export default class OrdersTable extends Component {
         );
     }
 }
+
+const mapStateToProps = ( state ) => ({
+    orders: state.order.orderList
+});
+
+const mapDispatchToProps = ( dispatch ) => ({
+
+});
+
+export default connect( mapStateToProps, mapDispatchToProps )( OrdersTable );
