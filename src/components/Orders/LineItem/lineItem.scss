@@ -1,0 +1,50 @@
+@import './../../common/variables.scss';
+$line-items-header-height : 50px;
+
+.line-items-wrapper {
+    height: 100%;
+    border-left: 1px solid #d6d4d4;
+
+    .line-items-header {
+        height: $line-items-header-height;
+        padding: 5px;
+
+        .label, .buttons-wrap {
+            // This is to vertical align these two div inside parent
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    }
+
+    .card-list-container {
+        height: calc(100vh - #{$header-height} - #{$line-items-header-height});
+        overflow-y: auto; 
+
+        .card-item {
+            height: auto;
+            min-height: 250px;
+        }
+        .card-item-header {
+            height: 30px;
+            background-color: #d4d4d4;
+
+            .item-name {
+                line-height: 30px;
+                padding-left: 10px;
+            }
+            .buttons-wrap {
+                // This is to vertical align these two div inside parent
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+            .item-button {
+                height: 100%;
+                border-radius: 0;
+            }
+        }
+    }
+}

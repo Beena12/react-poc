@@ -1,7 +1,7 @@
 @import './../../common/variables.scss';
 
 .orders-table-wrapper {
-    height: calc(100vh - #{$header-height});
+    height: 100%;
     
     .sort-section {
         height: 100px;
@@ -13,7 +13,7 @@
     }
 
     .orders-table {
-        height: calc(100vh - #{$header-height} - 100px);
+        height: calc(100% - 100px);
 
         .order-table-header {
             border-width: 1px 0;

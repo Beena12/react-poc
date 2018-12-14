@@ -2,8 +2,7 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 
 import OrdersTableWrapper from './OrdersTable/OrdersTableWrapper';
-
-import './orderPage.scss';
+import LineItemsWrapper from './LineItem/LineItemsWrapper';
 
 export default function OrdersPageWrapper() {
     return (
@@ -11,8 +10,8 @@ export default function OrdersPageWrapper() {
             <Col sm="9">
                 <OrdersTableWrapper/>
             </Col>
-            <Col sm="3" className="line-items-panel">
-                Line Items
+            <Col sm="3">
+                <LineItemsWrapper/>
             </Col>
         </Row>
     );

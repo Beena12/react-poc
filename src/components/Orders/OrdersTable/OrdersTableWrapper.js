@@ -45,7 +45,7 @@ export default class OrdersTableWrapper extends Component {
         
         //Width Calculation
         const mainPanelWidth = document.querySelector('.main-panel').offsetWidth;
-        const lineItemsPanelWidth = document.querySelector('.main-panel .line-items-panel').offsetWidth;
+        const lineItemsPanelWidth = document.querySelector('.main-panel .line-items-wrapper').scrollWidth;
         const tableWidth = mainPanelWidth - lineItemsPanelWidth;
         
         return {
