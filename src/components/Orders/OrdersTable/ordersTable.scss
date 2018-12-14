@@ -12,4 +12,8 @@
             width: 150px;
         }
     }
+
+    .orders-table {
+        height: calc(100vh - #{$header-height} - 100px);
+    }
 }

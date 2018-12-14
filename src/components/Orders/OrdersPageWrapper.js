@@ -9,7 +9,7 @@ export default function OrdersPageWrapper() {
             <Col sm="9">
                 <OrdersTableWrapper/>
             </Col>
-            <Col sm="3">
+            <Col sm="3" className="line-items-panel">
                 Line Items
             </Col>
         </Row>
