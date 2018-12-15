@@ -5,12 +5,14 @@
         height: $header-height;
         border-bottom: 1px solid #d6d4d4;
 
-        .customer-name {
+        .customer-title {
             float: left;
+            line-height: $header-height;
+            padding-left: 10px; 
         }
 
         .searchbox-container, .avatar-container {
-            float:right;
+            float: right;
             height: 100%;
         }
 

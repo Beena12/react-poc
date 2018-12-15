@@ -14,7 +14,7 @@ export default function CardItem( props ) {
                         className="item-button"
                         onClick = { props.onDeleteClick }
                     >
-                        <i className="fa fa-remove"></i>
+                        <i className="fa fa-trash"></i>
                     </Button>
                     <Button 
                         color="primary"

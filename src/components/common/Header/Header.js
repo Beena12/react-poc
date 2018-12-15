@@ -10,10 +10,6 @@ export default function Header() {
             <div className="customer-title">
                 Customer Lookup
             </div>
-
-            <div className="searchbox-container">
-                <SearchBox/>
-            </div>
             <div className="avatar-container">
                 <UserAvatar 
                     size="50" 
@@ -21,6 +17,10 @@ export default function Header() {
                     src="https://pbs.twimg.com/profile_images/906557353549598720/oapgW_Fp_bigger.jpg"
                 />
             </div>
+            <div className="searchbox-container">
+                <SearchBox/>
+            </div>
+            
         </div>
     );
 }
