@@ -53,7 +53,8 @@ export default class CardItem extends Component {
                             className="item-button"
                             onClick = { this.handleEditClick }
                         >
-                            <i className="fa fa-edit"></i>
+                            { !isEditMode && <i className="fa fa-edit"></i>}
+                            { isEditMode && <i className="fa fa-save"></i>}
                         </Button>
                     </div>
                 </div>
