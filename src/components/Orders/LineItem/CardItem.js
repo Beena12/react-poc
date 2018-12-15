@@ -55,3 +55,10 @@ export default function CardItem( props ) {
         </div>
     );
 }
+
+CardItem.defaultProps = {
+    uom: "Each",
+    cost: 1,
+    units: 1,
+    description: "-"
+}

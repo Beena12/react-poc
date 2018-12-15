@@ -34,6 +34,7 @@ class LineItemsWrapper extends Component {
                 <div className="card-list-container">
                     <CardItem/>
                     <CardItem/>
+                    <CardItem/>
                 </div>
             </div>
         );

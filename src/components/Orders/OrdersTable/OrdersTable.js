@@ -7,6 +7,10 @@ import { ordersTableColumns } from "./staticData";
 
 
 class OrdersTable extends Component {
+    state = {
+        selectedRowIndex : -10
+    }
+
     noRowsRenderer = () => {
         return (
             <div className="d-flex align-items-center justify-content-center h-100">
@@ -14,9 +18,17 @@ class OrdersTable extends Component {
             </div>
         );
     }
+
+    handleRowClick = ({e, index, rowData}) => {
+        this.setState({
+            selectedRowIndex: index
+        });
+    }
     
     render() {
         const { height, width, orders } = this.props;
+        const { selectedRowIndex } = this.state;
+
         return (
             <VirtualTable
                 columns = { ordersTableColumns }
@@ -26,6 +38,9 @@ class OrdersTable extends Component {
                 noRowsRenderer = { this.noRowsRenderer }
                 headerRowClass = "order-table-header"
                 evenRowClass = "order-table-even-row"
+                selectedRowClass = "order-table-selected-row"
+                selectedRowIndex = { selectedRowIndex }
+                onRowClick = { this.handleRowClick }
             />
         );
     }

@@ -12,14 +12,21 @@ export default function VirtualTable( props ) {
             width, 
             headerRowClass, 
             evenRowClass, 
-            oddRowClass 
+            oddRowClass ,
+            onRowClick,
+            selectedRowIndex,
+            selectedRowClass
         } = props;
 
     const getRowClassName = ( row ) => {
         const { index } = row;
         if( index === -1){
             return headerRowClass;
-        } else {
+        }
+        else if( index === selectedRowIndex ) {
+            return selectedRowClass;
+        } 
+        else {
             return index % 2 === 0 ? evenRowClass : oddRowClass;
         }
     }
@@ -37,7 +44,8 @@ export default function VirtualTable( props ) {
             tableClassName  = ""
             headerClassName = ""
             rowClassName    = { getRowClassName }
-            gridClassName   ='no-outline'
+            gridClassName   = 'no-outline'
+            onRowClick      = { onRowClick }
         >
             {
                 columns.map( column => (
@@ -54,3 +62,9 @@ export default function VirtualTable( props ) {
         </AutoSizedTable>
     );
 }
+
+VirtualTable.defaultProps = {
+    headerRowClass: "",
+    evenRowClass: "",
+    selectedRowClass: "",
+};
