@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import VirtualTable from "./../../common/Table/VirtualTable";
 
+import { fetchOrderLineItems } from "./../../../actionCreators/order";
+
 import { ordersTableColumns } from "./staticData";
 
 
@@ -23,6 +25,7 @@ class OrdersTable extends Component {
         this.setState({
             selectedRowIndex: index
         });
+        this.props.fetchOrderLineItems( rowData.order_no );
     }
     
     render() {
@@ -51,7 +54,7 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-
+    fetchOrderLineItems: ( reqData ) => dispatch( fetchOrderLineItems( reqData ))
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( OrdersTable );

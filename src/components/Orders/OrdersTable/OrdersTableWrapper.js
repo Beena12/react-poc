@@ -22,13 +22,20 @@ export default class OrdersTableWrapper extends Component {
         window.addEventListener("resize", this.setTableDimension );
     }
 
+    componentDidUpdate() {
+        this.setTableDimension();
+    }
+
     componentWillUnmount() {
         window.removeEventListener("resize", this.setTableDimension );
     }
 
     setTableDimension = () => {
+        const { tableHeight, tableWidth } = this.state;
         const tableDimension = this.getTableDimension( this.ordersTableElmRef.current );
-        this.setState( tableDimension );
+        if( tableDimension.tableHeight != tableHeight || tableDimension.tableWidth != tableWidth ) {
+            this.setState( tableDimension );
+        }
     }
 
     getTableDimension = ( tableElm ) => {
@@ -45,7 +52,8 @@ export default class OrdersTableWrapper extends Component {
         
         //Width Calculation
         const mainPanelWidth = document.querySelector('.main-panel').offsetWidth;
-        const lineItemsPanelWidth = document.querySelector('.main-panel .line-items-wrapper').scrollWidth;
+        const lineItemsPanel = document.querySelector('.main-panel .line-items-wrapper');
+        const lineItemsPanelWidth = (lineItemsPanel && lineItemsPanel.scrollWidth) || 0;
         const tableWidth = mainPanelWidth - lineItemsPanelWidth;
         
         return {
