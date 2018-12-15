@@ -3,10 +3,11 @@ $line-items-header-height : 50px;
 
 .line-items-wrapper {
     height: 100%;
-    border-left: 1px solid #d6d4d4;
+    border-left: 1px solid $panel-border-color;
 
     .line-items-header {
         height: $line-items-header-height;
+        border-bottom: 1px solid $panel-border-color;
         padding: 5px;
 
         .label, .buttons-wrap {
@@ -20,7 +21,8 @@ $line-items-header-height : 50px;
 
     .card-list-container {
         height: calc(100vh - #{$header-height} - #{$line-items-header-height});
-        overflow-y: auto; 
+        overflow-y: auto;
+        overflow-x: hidden; 
 
         .card-item {
             height: auto;
@@ -29,10 +31,10 @@ $line-items-header-height : 50px;
         .card-item-header {
             height: 30px;
             background-color: #d4d4d4;
+            padding-left: 10px;
 
             .item-name {
                 line-height: 30px;
-                padding-left: 10px;
             }
             .buttons-wrap {
                 // This is to vertical align these two div inside parent
@@ -44,6 +46,14 @@ $line-items-header-height : 50px;
             .item-button {
                 height: 100%;
                 border-radius: 0;
+            }
+        }
+        .card-item-body {
+            padding: 10px;
+
+            .field-label {
+                font-size: 12px;
+                color: #848484;
             }
         }
     }
