@@ -4,12 +4,16 @@ import {
     FETCH_ORDER_LIST_SUCCESS,
     FETCH_ORDER_LIST_ERROR,
 
+    FETCH_ORDER_LINE_ITEMS_LOADING,
+
     RESET_ORDER_LIST_STATE
 } from "./../actions/order";
 
 const initialState = {
     orderList: mockedOrdersList, // Need to remove mockedOrdersList once API is ready: []
-    isOrderListLoading: false
+    isOrderListLoading: false,
+    showLineItemsPanel: false,
+    isOrderLineItemsLoading: false
 };
 
 export const orderReducer = ( state = initialState, action ) => {
@@ -31,6 +35,13 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false
+            };
+
+        case FETCH_ORDER_LINE_ITEMS_LOADING:
+            return {
+                ...state,
+                showLineItemsPanel: true,
+                isOrderLineItemsLoading: true
             };
 
         case RESET_ORDER_LIST_STATE:

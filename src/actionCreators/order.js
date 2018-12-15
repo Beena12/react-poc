@@ -3,11 +3,16 @@ import {
     FETCH_ORDER_LIST_SUCCESS,
     FETCH_ORDER_LIST_ERROR,
 
+    FETCH_ORDER_LINE_ITEMS_LOADING,
+    FETCH_ORDER_LINE_ITEMS_SUCCESS,
+    FETCH_ORDER_LINE_ITEMS_ERROR,
+
     RESET_ORDER_LIST_STATE
 } from './../actions/order';
 
 import {
-    fetchOrderListAPI
+    fetchOrderListAPI,
+    fetchOrderLineItemsAPI
 } from './../apis/order';
 
 const fetchOrderListLoading = () => ({
@@ -21,7 +26,7 @@ const fetchOrderListSuccess = ( response ) => ({
 
 const fetchOrderListError = () => ({
     type: FETCH_ORDER_LIST_ERROR
-})
+});
 
 export const fetchOrderList = ( reqData ) => {
     return ( dispatch => {
@@ -34,6 +39,17 @@ export const fetchOrderList = ( reqData ) => {
         .catch( error => {
             fetchOrderListError();
         });
+    });
+}
+
+const fetchOrderLineItemsLoading = () => ({
+    type: FETCH_ORDER_LINE_ITEMS_LOADING
+});
+
+export const fetchOrderLineItems = () => {
+    return ( dispatch => {
+        dispatch( fetchOrderLineItemsLoading() );
+        // ToDo - API call
     });
 }
 
