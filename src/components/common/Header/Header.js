@@ -2,14 +2,17 @@ import React from 'react';
 import UserAvatar from 'react-user-avatar';
 import './header.scss';
 
+import SearchBox from '../SearchBox/SearchBox';
+
 export default function Header() {
     return (
         <div className="header">
-            <div className="customer-name">
-
+            <div className="customer-title">
+                Customer Lookup
             </div>
-            <div className="searchbox-container">
 
+            <div className="searchbox-container">
+                <SearchBox/>
             </div>
             <div className="avatar-container">
                 <UserAvatar 
