@@ -33,7 +33,7 @@ export default class OrdersTableWrapper extends Component {
     setTableDimension = () => {
         const { tableHeight, tableWidth } = this.state;
         const tableDimension = this.getTableDimension( this.ordersTableElmRef.current );
-        if( tableDimension.tableHeight != tableHeight || tableDimension.tableWidth != tableWidth ) {
+        if( tableDimension.tableHeight !== tableHeight || tableDimension.tableWidth !== tableWidth ) {
             this.setState( tableDimension );
         }
     }

@@ -1,7 +1,9 @@
 @import './../../common/variables.scss';
 
 .orders-table-wrapper {
-    height: 100%;
+    height: calc(100vh - #{$header-height});
+    overflow-y: auto;
+    overflow-x: hidden;
     
     .sort-section {
         height: 100px;
