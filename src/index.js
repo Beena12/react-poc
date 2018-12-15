@@ -10,6 +10,7 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore(
