@@ -27,7 +27,8 @@ class LineItemsWrapper extends Component {
                             size="sm" 
                             onClick = { this.handleAddLineItemsClick }
                         >
-                            <span>Add</span>
+                            <i className="fa fa-plus-circle btn-icon"></i>
+                            <span className="btn-text">Add</span>
                         </Button>
                     </div>
                 </div>
