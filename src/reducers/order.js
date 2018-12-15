@@ -13,7 +13,8 @@ const initialState = {
     orderList: mockedOrdersList, // Need to remove mockedOrdersList once API is ready: []
     isOrderListLoading: false,
     showLineItemsPanel: false,
-    isOrderLineItemsLoading: false
+    isOrderLineItemsLoading: false,
+    orderLineItems: []
 };
 
 export const orderReducer = ( state = initialState, action ) => {

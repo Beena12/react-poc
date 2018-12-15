@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button } from 'reactstrap';
 
 import CardItem from "./CardItem";
+import { updateOrderLineItem } from "./../../../actionCreators/order";
 
 import './lineItem.scss';
 
@@ -13,6 +14,10 @@ class LineItemsWrapper extends Component {
     }
     
     handleAddLineItemsClick = () => {
+
+    }
+
+    handleUpdateClick = ( data ) => {
 
     }
 
@@ -33,7 +38,7 @@ class LineItemsWrapper extends Component {
                     </div>
                 </div>
                 <div className="card-list-container">
-                    <CardItem/>
+                    <CardItem onUpdateClick = { this.handleUpdateClick }/>
                     <CardItem/>
                     <CardItem/>
                 </div>
@@ -43,11 +48,11 @@ class LineItemsWrapper extends Component {
 }
 
 const mapStateToProps = ( state ) => ({
-
+    currOrderLineItems: state.order.orderLineItems
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-
+    updateOrderLineItem: ( reqData ) => dispatch( updateOrderLineItem( reqData ))
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( LineItemsWrapper );

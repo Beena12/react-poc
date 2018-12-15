@@ -53,6 +53,10 @@ export const fetchOrderLineItems = () => {
     });
 }
 
+export const updateOrderLineItem = ( reqData ) => ({
+    
+});
+
 export const resetOrderListState = () => ({
     type: RESET_ORDER_LIST_STATE
 });
