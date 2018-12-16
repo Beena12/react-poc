@@ -28,5 +28,5 @@ export const mockedOrdersList = Array(500).fill().map((val, idx) => {
         created_by  : "Jane Doe",
         is_picked   : "Yes",
         is_shipped  : "Yes"
-    }
+    };
 });

@@ -14,6 +14,15 @@ $line-items-header-height : 50px;
         border-left: 0.5px solid #fff;
     }
 
+    .field-label {
+        font-size: 12px;
+        color: #848484;
+    }
+
+    .field-value {
+        font-size: 14px;
+    }
+
     .line-items-header {
         height: $line-items-header-height;
         border-bottom: 1px solid $panel-border-color;
@@ -59,11 +68,6 @@ $line-items-header-height : 50px;
         }
         .card-item-body {
             padding: 10px;
-
-            .field-label {
-                font-size: 12px;
-                color: #848484;
-            }
 
             .units-inputbox {
                 width: 60px;
