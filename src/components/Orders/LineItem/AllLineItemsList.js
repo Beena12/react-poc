@@ -17,12 +17,18 @@ class AllLineItemsList extends Component {
         });
     }
 
+    handleLineItemSearch = ( searchValue ) => {
+        console.log( searchValue );
+    }
+
     render() {
         const { allLineItemList } = this.props;
         const { selectedLineItemId } = this.state;
         return (
             <>
-                <SearchBox/>
+                <div className="line-item-searchbox-container">
+                    <SearchBox onSearchClick = { this.handleLineItemSearch }/>
+                </div>
                 <div className="line-items-list mt-3">
                     {
                         allLineItemList.map( lineItem => (

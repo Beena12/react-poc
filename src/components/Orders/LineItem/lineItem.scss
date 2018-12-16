@@ -23,6 +23,14 @@ $line-items-header-height : 50px;
         font-size: 14px;
     }
 
+    .line-item-searchbox-container {
+        height: 50px;
+        input.form-control {
+            border-top-width: 0;
+            border-left-width: 0;
+        }
+    }
+
     .line-items-header {
         height: $line-items-header-height;
         border-bottom: 1px solid $panel-border-color;

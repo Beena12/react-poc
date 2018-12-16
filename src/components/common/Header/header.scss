@@ -19,5 +19,12 @@
         .avatar-container {
             padding: 5px;
         }
+
+        .searchbox-container {
+            input.form-control {
+                border-top-width: 0;
+                border-bottom-width: 0;
+            }
+        }
     }
 }

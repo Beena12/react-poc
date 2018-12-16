@@ -5,6 +5,10 @@ import './header.scss';
 import SearchBox from '../SearchBox/SearchBox';
 
 export default function Header() {
+    function handleCustomerSearchClick( searchVal ) {
+        console.log( searchVal );
+    }
+
     return (
         <div className="header">
             <div className="customer-title">
@@ -18,7 +22,7 @@ export default function Header() {
                 />
             </div>
             <div className="searchbox-container">
-                <SearchBox/>
+                <SearchBox onSearchClick = {handleCustomerSearchClick}/>
             </div>
             
         </div>
