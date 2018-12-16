@@ -21,6 +21,10 @@ class LineItemsWrapper extends Component {
 
     }
 
+    handleDeleteClick = ( data ) => {
+        
+    }
+
     render() {
         return (
             <div className="line-items-wrapper">
@@ -38,7 +42,10 @@ class LineItemsWrapper extends Component {
                     </div>
                 </div>
                 <div className="card-list-container">
-                    <CardItem onUpdateClick = { this.handleUpdateClick }/>
+                    <CardItem 
+                        onUpdateClick = { this.handleUpdateClick } 
+                        onDeleteClick = { this.handleDeleteClick }
+                    />
                     <CardItem/>
                     <CardItem/>
                 </div>
