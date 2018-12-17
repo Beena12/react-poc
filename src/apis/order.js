@@ -7,5 +7,9 @@ export const fetchOrderListAPI = ( reqData ) => {
 }
 
 export const fetchOrderLineItemsAPI = ( reqData ) => {
-    return {}; 
+    const orderId = reqData.orderId;
+    const url = `/api/orders/${ orderId }`
+
+    return fetch( url )
+            .then( response => response.json());
 }

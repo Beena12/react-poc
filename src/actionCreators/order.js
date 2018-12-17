@@ -46,10 +46,25 @@ const fetchOrderLineItemsLoading = () => ({
     type: FETCH_ORDER_LINE_ITEMS_LOADING
 });
 
-export const fetchOrderLineItems = () => {
+const fetchOrderLineItemsSuccess = ( orderDetails ) => ({
+    type: FETCH_ORDER_LINE_ITEMS_SUCCESS,
+    payload: orderDetails.orderItems
+});
+
+const fetchOrderLineItemsError = () => ({
+    type: FETCH_ORDER_LINE_ITEMS_ERROR
+});
+
+export const fetchOrderLineItems = ( data ) => {
     return ( dispatch => {
         dispatch( fetchOrderLineItemsLoading() );
-        // ToDo - API call
+        return fetchOrderLineItemsAPI( data )
+        .then( response => {
+            fetchOrderLineItemsSuccess( response.data );
+        })
+        .catch( error => {
+            fetchOrderLineItemsError();
+        });
     });
 }
 

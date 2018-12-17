@@ -39,6 +39,7 @@ class LineItemsWrapper extends Component {
 
     render() {
         const { showAllLineItemsPanel } = this.state;
+        const { currOrderLineItems } = this.props;
         return (
             <div className="line-items-wrapper">
                 <div className="line-items-header">
@@ -69,15 +70,23 @@ class LineItemsWrapper extends Component {
                         showAllLineItemsPanel && <AllLineItemsList/>
                     }
                     {
-                        !showAllLineItemsPanel && (
-                            <>
-                                <CardItem 
+                        !showAllLineItemsPanel && currOrderLineItems.length && (
+                            currOrderLineItems.map( lineItem => (
+                                <CardItem
+                                    key = { lineItem.id }
+                                    uom  = { lineItem.uom }
+                                    cost = { lineItem.cost }
+                                    description = { lineItem.description }
+                                    units = { lineItem.units }
                                     onUpdateClick = { this.handleUpdateClick } 
                                     onDeleteClick = { this.handleDeleteClick }
                                 />
-                                <CardItem/>
-                                <CardItem/>
-                            </>
+                            ))
+                        )
+                    }
+                    {
+                        !showAllLineItemsPanel && (currOrderLineItems.length === 0) && (
+                            <div>No Line Items found for this Order</div>
                         )
                     }
                 </div>

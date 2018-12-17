@@ -5,8 +5,10 @@ import {
     FETCH_ORDER_LIST_ERROR,
 
     FETCH_ORDER_LINE_ITEMS_LOADING,
+    FETCH_ORDER_LINE_ITEMS_SUCCESS,
+    FETCH_ORDER_LINE_ITEMS_ERROR,
 
-    RESET_ORDER_LIST_STATE
+    RESET_ORDER_LIST_STATE,
 } from "./../actions/order";
 
 const initialState = {
@@ -43,6 +45,21 @@ export const orderReducer = ( state = initialState, action ) => {
                 ...state,
                 showLineItemsPanel: true,
                 isOrderLineItemsLoading: true
+            };
+
+        case FETCH_ORDER_LINE_ITEMS_SUCCESS:
+            return {
+                ...state,
+                showLineItemsPanel: true,
+                isOrderLineItemsLoading: false,
+                orderLineItems: action.payload
+            };
+
+        case FETCH_ORDER_LINE_ITEMS_ERROR:
+            return {
+                ...state,
+                showLineItemsPanel: true,
+                isOrderLineItemsLoading: false
             };
 
         case RESET_ORDER_LIST_STATE:
