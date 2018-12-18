@@ -15,7 +15,7 @@ class LineItemsWrapper extends Component {
         showAllLineItemsPanel: false
     }
     
-    handleAddLineItemsClick = () => {
+    handleLineItemsAddClick = () => {
         if( this.state.showAllLineItemsPanel ) {
             // This is temporary, need to dispatch an action here
             this.setState({
@@ -48,7 +48,7 @@ class LineItemsWrapper extends Component {
                         <Button 
                             color="primary"
                             size="sm" 
-                            onClick = { this.handleAddLineItemsClick }
+                            onClick = { this.handleLineItemsAddClick }
                         >
                             { !showAllLineItemsPanel && (
                                 <>
@@ -70,7 +70,7 @@ class LineItemsWrapper extends Component {
                         showAllLineItemsPanel && <AllLineItemsList/>
                     }
                     {
-                        !showAllLineItemsPanel && currOrderLineItems.length && (
+                        !showAllLineItemsPanel && (currOrderLineItems.length > 0) && (
                             currOrderLineItems.map( lineItem => (
                                 <CardItem
                                     key = { lineItem.id }
@@ -86,7 +86,9 @@ class LineItemsWrapper extends Component {
                     }
                     {
                         !showAllLineItemsPanel && (currOrderLineItems.length === 0) && (
-                            <div>No Line Items found for this Order</div>
+                            <div className="d-flex align-items-center justify-content-center h-100">
+                                No Line Items found for this Order
+                            </div>
                         )
                     }
                 </div>
