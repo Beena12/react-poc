@@ -34,10 +34,10 @@ export const fetchOrderList = ( reqData ) => {
         
         return fetchOrderListAPI( reqData )
         .then( response => {
-            fetchOrderListSuccess( response );
+            dispatch(fetchOrderListSuccess( response ));
         })
         .catch( error => {
-            fetchOrderListError();
+            dispatch(fetchOrderListError());
         });
     });
 }
@@ -60,10 +60,10 @@ export const fetchOrderLineItems = ( data ) => {
         dispatch( fetchOrderLineItemsLoading() );
         return fetchOrderLineItemsAPI( data )
         .then( response => {
-            fetchOrderLineItemsSuccess( response.data );
+            dispatch(fetchOrderLineItemsSuccess( response.data ));
         })
         .catch( error => {
-            fetchOrderLineItemsError();
+            dispatch(fetchOrderLineItemsError());
         });
     });
 }

@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
-import { connect } from "react-redux";
-
 import { Button } from 'reactstrap';
 
-import CardItem from "./CardItem";
 import AllLineItemsList from "./AllLineItemsList";
-
-import { updateOrderLineItem } from "./../../../actionCreators/order";
+import OrderLineItemList from "./OrderLineItemList";
 
 import './lineItem.scss';
 
-class LineItemsWrapper extends Component {
+export default class LineItemsWrapper extends Component {
     state = {
         showAllLineItemsPanel: false
     }
@@ -29,17 +25,8 @@ class LineItemsWrapper extends Component {
         }
     }
 
-    handleUpdateClick = ( data ) => {
-
-    }
-
-    handleDeleteClick = ( data ) => {
-        
-    }
-
     render() {
         const { showAllLineItemsPanel } = this.state;
-        const { currOrderLineItems } = this.props;
         return (
             <div className="line-items-wrapper">
                 <div className="line-items-header">
@@ -70,39 +57,10 @@ class LineItemsWrapper extends Component {
                         showAllLineItemsPanel && <AllLineItemsList/>
                     }
                     {
-                        !showAllLineItemsPanel && (currOrderLineItems.length > 0) && (
-                            currOrderLineItems.map( lineItem => (
-                                <CardItem
-                                    key = { lineItem.id }
-                                    uom  = { lineItem.uom }
-                                    cost = { lineItem.cost }
-                                    description = { lineItem.description }
-                                    units = { lineItem.units }
-                                    onUpdateClick = { this.handleUpdateClick } 
-                                    onDeleteClick = { this.handleDeleteClick }
-                                />
-                            ))
-                        )
-                    }
-                    {
-                        !showAllLineItemsPanel && (currOrderLineItems.length === 0) && (
-                            <div className="d-flex align-items-center justify-content-center h-100">
-                                No Line Items found for this Order
-                            </div>
-                        )
+                        !showAllLineItemsPanel && <OrderLineItemList/>
                     }
                 </div>
             </div>
         );
     }
 }
-
-const mapStateToProps = ( state ) => ({
-    currOrderLineItems: state.order.orderLineItems
-});
-
-const mapDispatchToProps = ( dispatch ) => ({
-    updateOrderLineItem: ( reqData ) => dispatch( updateOrderLineItem( reqData ))
-});
-
-export default connect( mapStateToProps, mapDispatchToProps )( LineItemsWrapper );
