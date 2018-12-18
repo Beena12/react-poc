@@ -13,7 +13,6 @@ export default class LineItemsWrapper extends Component {
     
     handleLineItemsAddClick = () => {
         if( this.state.showAllLineItemsPanel ) {
-            // This is temporary, need to dispatch an action here
             this.setState({
                 showAllLineItemsPanel: false
             });
