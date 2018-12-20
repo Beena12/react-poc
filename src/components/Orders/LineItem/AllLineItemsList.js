@@ -12,7 +12,8 @@ class AllLineItemsList extends Component {
         selectedLineItemId : null
     }
 
-    handleItemSelection = ( lineItemId ) => {
+    handleItemSelection = ( e, lineItemId ) => {
+        e.stopPropagation();
         this.setState({
             selectedLineItemId: lineItemId
         });
@@ -52,7 +53,7 @@ class AllLineItemsList extends Component {
                         <div className="line-items-list mt-3">
                             {
                                 allLineItemList.map( lineItem => (
-                                    <div className="mb-3" key={ lineItem._id }>
+                                    <div className="mb-3" key={ lineItem._id } onClick={(e) => this.handleItemSelection( e, lineItem._id ) }>
                                         <Row noGutters={true}>
                                             <Col sm="1"></Col>
                                             <Col sm="4"  className="field-label">Item Name</Col>
@@ -62,7 +63,7 @@ class AllLineItemsList extends Component {
                                             <Col sm="1" className="pl-2">
                                                 <input type="radio"
                                                     checked={ lineItem._id === selectedLineItemId } 
-                                                    onChange={() => this.handleItemSelection( lineItem._id ) }
+                                                    onChange={(e) => this.handleItemSelection( e, lineItem._id ) }
                                                 />
                                             </Col>
                                             <Col sm="4" className="field-value">{ lineItem.name }</Col>
