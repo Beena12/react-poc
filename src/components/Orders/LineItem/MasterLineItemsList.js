@@ -9,7 +9,7 @@ import { fetchMasterLineItems } from "../../../actionCreators/lineItem";
 
 class MasterLineItemsList extends Component {
     handleLineItemSearch = ( searchValue ) => {
-        console.log( searchValue );
+        this.props.fetchMasterLineItems( searchValue );
     }
 
     componentDidMount() {
@@ -75,7 +75,7 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-    fetchMasterLineItems: () => dispatch( fetchMasterLineItems() )
+    fetchMasterLineItems: ( searchValue ) => dispatch( fetchMasterLineItems( searchValue ) )
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( MasterLineItemsList );
