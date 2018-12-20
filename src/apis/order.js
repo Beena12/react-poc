@@ -1,7 +1,7 @@
 
 export const fetchOrderListAPI = ( reqData ) => {
 //    const url = `/orders/${ reqData.customerId }/?sort_by=${ reqData.sortBy}`;
-    const url = `http://127.0.0.1:9000/api/orders/?customer=${ reqData.customerId }`;
+    const url = `/api/orders/?customer=${ reqData.customerId }`;
     return fetch( url )
             .then( response => response.json());
 }

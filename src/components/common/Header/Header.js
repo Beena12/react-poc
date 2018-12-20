@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserAvatar from 'react-user-avatar';
 import './header.scss';
 
@@ -8,15 +8,12 @@ import { connect } from "react-redux";
 import { fetchCustomer } from "./../../../actionCreators/customer";
 
 
-class Header extends Component {
+function Header(props) {
     
-    handleCustomerSearchClick = ( searchVal ) => {
-        console.log( searchVal );
-        this.props.fetchCustomer( searchVal );   
-        console.log("Customer value ---- ", this.props);
+    function handleCustomerSearchClick( searchVal ) {
+        props.fetchCustomer( searchVal );   
     }
 
-    render(){
         return (
             <div className="header">
                 <div className="customer-section">
@@ -31,20 +28,19 @@ class Header extends Component {
                     />
                 </div>
                 <div className="searchbox-container">
-                    <SearchBox onSearchClick = {this.handleCustomerSearchClick}/>
+                    <SearchBox onSearchClick = {handleCustomerSearchClick}/>
                 </div>
                 
             </div>
         );        
-    }
 }
 
 const mapStateToProps = ( state ) => ({
-    customer: state.customer
+    customer_name: state.customer_name
 });
 
-const mapDispatchToProps = ( dispatch ) => ({
-    fetchCustomer: ( reqData ) => dispatch( fetchCustomer(reqData) ) 
+const mapDispatchToProps = ( dispatch ) => ({    
+         fetchCustomer: ( reqData ) => dispatch( fetchCustomer(reqData) )     
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( Header );

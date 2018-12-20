@@ -9,13 +9,17 @@ import {
     fetchCustomerAPI,
 } from './../apis/customer';
 
+import {
+    fetchOrderList,
+} from './order';
+
 const fetchCustomerLoading = () => ({
     type: FETCH_CUSTOMER_LOADING
 });
 
 const fetchCustomerSuccess = ( response ) => ({
     type: FETCH_CUSTOMER_SUCCESS,
-    payload: response
+    payload: response.name
 });
 
 const fetchCustomerError = () => ({
@@ -24,12 +28,11 @@ const fetchCustomerError = () => ({
 
 
 export const fetchCustomer = ( reqData ) => {
-    console.log("reqData ----", reqData);
     return ( dispatch => {
-    	dispatch( fetchCustomerLoading() );
         return fetchCustomerAPI( reqData )
 	        .then( response => {
-	            fetchCustomerSuccess( response );
+	            dispatch(fetchOrderList( response.cust_id ));
+                fetchCustomerSuccess( response.data );                
 	        })
 	        .catch( error => {
 	            fetchCustomerError();

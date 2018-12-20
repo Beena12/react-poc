@@ -17,7 +17,6 @@ class OrderLineItemList extends Component {
 
     render() {
         const { currOrderLineItems, isLoading } = this.props;
-        console.log("Order line items from props ------", currOrderLineItems);
         return (
             <>
             {
