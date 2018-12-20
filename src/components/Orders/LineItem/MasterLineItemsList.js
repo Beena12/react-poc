@@ -3,21 +3,21 @@ import { connect } from "react-redux";
 import Loader from 'react-loader-spinner';
 import { Row, Col } from 'reactstrap';
 
-import SearchBox from "./../../common/SearchBox/SearchBox";
-import { fetchAllLineItems } from "./../../../actionCreators/lineItem";
+import SearchBox from "../../common/SearchBox/SearchBox";
+import { fetchMasterLineItems } from "../../../actionCreators/lineItem";
 
 
-class AllLineItemsList extends Component {
+class MasterLineItemsList extends Component {
     handleLineItemSearch = ( searchValue ) => {
         console.log( searchValue );
     }
 
     componentDidMount() {
-        this.props.fetchAllLineItems();
+        this.props.fetchMasterLineItems();
     }
 
     render() {
-        const { allLineItemList, isLoading, onItemSelect, selectedLineItemId } = this.props;
+        const { masterLineItemList, isLoading, onItemSelect, selectedLineItemId } = this.props;
         return (
             <>
             {
@@ -40,7 +40,7 @@ class AllLineItemsList extends Component {
                         </div>
                         <div className="line-items-list mt-3">
                             {
-                                allLineItemList.map( lineItem => (
+                                masterLineItemList.map( lineItem => (
                                     <div className="mb-3" key={ lineItem._id } onClick={(e) => onItemSelect( e, lineItem._id ) }>
                                         <Row noGutters={true}>
                                             <Col sm="1"></Col>
@@ -70,12 +70,12 @@ class AllLineItemsList extends Component {
 }
 
 const mapStateToProps = ( state ) => ({
-    allLineItemList: state.lineItem.lineItemList,
+    masterLineItemList: state.lineItem.lineItemList,
     isLoading: state.lineItem.isLineItemListLoading
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-    fetchAllLineItems: () => dispatch( fetchAllLineItems() )
+    fetchMasterLineItems: () => dispatch( fetchMasterLineItems() )
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )( AllLineItemsList );
+export default connect( mapStateToProps, mapDispatchToProps )( MasterLineItemsList );

@@ -1,4 +1,4 @@
-export const fetchAllLineItemsAPI = () => {
+export const fetchMasterLineItemsAPI = () => {
     const url = `/api/items`
 
     return fetch( url )

@@ -1,34 +1,34 @@
 import { 
-    FETCH_ALL_LINE_ITEMS_LOADING,
-    FETCH_ALL_LINE_ITEMS_SUCCESS,
-    FETCH_ALL_LINE_ITEMS_ERROR
+    FETCH_MASTER_LINE_ITEMS_LOADING,
+    FETCH_MASTER_LINE_ITEMS_SUCCESS,
+    FETCH_MASTER_LINE_ITEMS_ERROR
 } from "./../actions/lineItem";
 
-import { fetchAllLineItemsAPI } from './../apis/lineItem';
+import { fetchMasterLineItemsAPI } from './../apis/lineItem';
 
-const fetchAllLineItemsLoading = () => ({
-    type: FETCH_ALL_LINE_ITEMS_LOADING
+const fetchMasterLineItemsLoading = () => ({
+    type: FETCH_MASTER_LINE_ITEMS_LOADING
 });
 
-const fetchAllLineItemsSuccess = ( allLineItems ) => ({
-    type: FETCH_ALL_LINE_ITEMS_SUCCESS,
-    payload: allLineItems
+const fetchMasterLineItemsSuccess = ( masterLineItems ) => ({
+    type: FETCH_MASTER_LINE_ITEMS_SUCCESS,
+    payload: masterLineItems
 });
 
-const fetchAllLineItemsError = () => ({
-    type: FETCH_ALL_LINE_ITEMS_ERROR
+const fetchMasterLineItemsError = () => ({
+    type: FETCH_MASTER_LINE_ITEMS_ERROR
 });
 
-export const fetchAllLineItems = ( reqData ) => {
+export const fetchMasterLineItems = ( reqData ) => {
     return ( dispatch => {
-        dispatch( fetchAllLineItemsLoading() );
+        dispatch( fetchMasterLineItemsLoading() );
         
-        return fetchAllLineItemsAPI( reqData )
+        return fetchMasterLineItemsAPI( reqData )
         .then( response => {
-            dispatch(fetchAllLineItemsSuccess( response.data ));
+            dispatch(fetchMasterLineItemsSuccess( response.data ));
         })
         .catch( error => {
-            dispatch(fetchAllLineItemsError());
+            dispatch(fetchMasterLineItemsError());
         });
     });
 }
