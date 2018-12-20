@@ -8,17 +8,6 @@ import { fetchAllLineItems } from "./../../../actionCreators/lineItem";
 
 
 class AllLineItemsList extends Component {
-    state = {
-        selectedLineItemId : null
-    }
-
-    handleItemSelection = ( e, lineItemId ) => {
-        e.stopPropagation();
-        this.setState({
-            selectedLineItemId: lineItemId
-        });
-    }
-
     handleLineItemSearch = ( searchValue ) => {
         console.log( searchValue );
     }
@@ -28,8 +17,7 @@ class AllLineItemsList extends Component {
     }
 
     render() {
-        const { allLineItemList, isLoading } = this.props;
-        const { selectedLineItemId } = this.state;
+        const { allLineItemList, isLoading, onItemSelect, selectedLineItemId } = this.props;
         return (
             <>
             {
@@ -53,7 +41,7 @@ class AllLineItemsList extends Component {
                         <div className="line-items-list mt-3">
                             {
                                 allLineItemList.map( lineItem => (
-                                    <div className="mb-3" key={ lineItem._id } onClick={(e) => this.handleItemSelection( e, lineItem._id ) }>
+                                    <div className="mb-3" key={ lineItem._id } onClick={(e) => onItemSelect( e, lineItem._id ) }>
                                         <Row noGutters={true}>
                                             <Col sm="1"></Col>
                                             <Col sm="4"  className="field-label">Item Name</Col>
@@ -63,7 +51,7 @@ class AllLineItemsList extends Component {
                                             <Col sm="1" className="pl-2">
                                                 <input type="radio"
                                                     checked={ lineItem._id === selectedLineItemId } 
-                                                    onChange={(e) => this.handleItemSelection( e, lineItem._id ) }
+                                                    onChange={(e) => onItemSelect( e, lineItem._id ) }
                                                 />
                                             </Col>
                                             <Col sm="4" className="field-value">{ lineItem.name }</Col>

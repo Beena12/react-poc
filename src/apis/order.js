@@ -13,3 +13,13 @@ export const fetchOrderLineItemsAPI = ( reqData ) => {
     return fetch( url )
             .then( response => response.json());
 }
+
+export const addOrderLineItemAPI = ( reqData ) => {
+    const url = `/api/orderitems`;
+    
+    return fetch( url, {
+                body: JSON.stringify(reqData), 
+                method: 'POST'
+            })
+            .then( response => response.json());
+}

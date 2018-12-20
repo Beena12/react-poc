@@ -1,20 +1,44 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
 import AllLineItemsList from "./AllLineItemsList";
 import OrderLineItemList from "./OrderLineItemList";
 
+import { addOrderLineItem } from "./../../../actionCreators/order";
+
 import './lineItem.scss';
 
-export default class LineItemsWrapper extends Component {
+class LineItemsWrapper extends Component {
     state = {
-        showAllLineItemsPanel: false
+        showAllLineItemsPanel: false,
+        selectedLineItemId: null
+    }
+
+    handleItemSelection = ( e, lineItemId ) => {
+        e.stopPropagation();
+        this.setState({
+            selectedLineItemId: lineItemId
+        });
     }
     
     handleLineItemsAddClick = () => {
-        if( this.state.showAllLineItemsPanel ) {
+        const { showAllLineItemsPanel, selectedLineItemId } = this.state;
+        const { currentSelectedOrderId } = this.props;
+        if( showAllLineItemsPanel ) {
+            if( selectedLineItemId ) {
+                const reqData = {
+                    item: selectedLineItemId,
+                    orderId: currentSelectedOrderId,
+                    itemQty: 1
+                };
+
+                this.props.addOrderLineItem( reqData );
+            }
+            
             this.setState({
-                showAllLineItemsPanel: false
+                showAllLineItemsPanel: false,
+                selectedLineItemId: null
             });
         }
         else {
@@ -25,7 +49,7 @@ export default class LineItemsWrapper extends Component {
     }
 
     render() {
-        const { showAllLineItemsPanel } = this.state;
+        const { showAllLineItemsPanel, selectedLineItemId } = this.state;
         return (
             <div className="line-items-wrapper">
                 <div className="line-items-header">
@@ -53,7 +77,12 @@ export default class LineItemsWrapper extends Component {
                 </div>
                 <div className="card-list-container">
                     {
-                        showAllLineItemsPanel && <AllLineItemsList/>
+                        showAllLineItemsPanel && (
+                            <AllLineItemsList 
+                                selectedLineItemId = { selectedLineItemId }
+                                onItemSelect = { this.handleItemSelection }
+                            />
+                        )
                     }
                     {
                         !showAllLineItemsPanel && <OrderLineItemList/>
@@ -63,3 +92,13 @@ export default class LineItemsWrapper extends Component {
         );
     }
 }
+
+const mapStateToProps = ( state ) => ({
+    currentSelectedOrderId: state.order.currentSelectedOrderId
+});
+
+const mapDispatchToProps = ( dispatch ) => ({
+    addOrderLineItem: ( lineItem ) => { dispatch( addOrderLineItem( lineItem )) } 
+})
+
+export default connect( mapStateToProps, mapDispatchToProps )(LineItemsWrapper);
