@@ -58,6 +58,7 @@ const fetchOrderLineItemsError = () => ({
 export const fetchOrderLineItems = ( data ) => {
     return ( dispatch => {
         dispatch( fetchOrderLineItemsLoading() );
+        
         return fetchOrderLineItemsAPI( data )
         .then( response => {
             dispatch(fetchOrderLineItemsSuccess( response.data ));

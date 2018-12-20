@@ -13,14 +13,15 @@ class Header extends Component {
     handleCustomerSearchClick = ( searchVal ) => {
         console.log( searchVal );
         this.props.fetchCustomer( searchVal );   
-        console.log("Customer value ---- ", this.props.customer);
+        console.log("Customer value ---- ", this.props);
     }
 
     render(){
         return (
             <div className="header">
-                <div className="customer-title">
-                    <text>Customer lookup</text>
+                <div className="customer-section">
+                        <div className="customer-title"> Customer Lookup </div>
+                        <div className="customer-name"> Customer name : </div>
                 </div>
                 <div className="avatar-container">
                     <UserAvatar 
@@ -43,7 +44,7 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-    fetchCustomer: ( reqData ) => dispatch( fetchCustomer( reqData ))
+    fetchCustomer: ( reqData ) => dispatch( fetchCustomer(reqData) ) 
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( Header );

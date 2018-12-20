@@ -10,8 +10,7 @@ const initialState = {
     	cust_id: -10,
     	_id: -10,
     	create_date: '00-00-00T00:00:00.000Z',
-    	name: "some name",
-    	__v: 0
+    	name: "some name"
     }, 
 
     isCustomerLoading: false,
@@ -21,19 +20,22 @@ const initialState = {
 export const headerReducer = ( state = initialState, action ) => {
     switch (action.type) {
         case FETCH_CUSTOMER_LOADING:
+        	console.log("In FETCH_CUSTOMER_LOADING");
             return {
                 ...state,
                 isCustomerLoading: true
             };
 
         case FETCH_CUSTOMER_SUCCESS:
+            console.log("In FETCH_CUSTOMER_SUCESS ---with payload", action.payload);
             return {
                 ...state,
                 isCustomerLoading: false,
-                customer: action.payload.customer
+                customer: action.payload
             };
 
         case FETCH_CUSTOMER_ERROR:
+            console.log("In FETCH_CUSTOMER_ERROR");
             return {
                 ...state,
                 isCustomerLoading: false

@@ -26,14 +26,13 @@ const fetchCustomerError = () => ({
 export const fetchCustomer = ( reqData ) => {
     console.log("reqData ----", reqData);
     return ( dispatch => {
-        dispatch( fetchCustomerLoading() );
-             
+    	dispatch( fetchCustomerLoading() );
         return fetchCustomerAPI( reqData )
-        .then( response => {
-            fetchCustomerSuccess( response );
-        })
-        .catch( error => {
-            fetchCustomerError();
-        });
+	        .then( response => {
+	            fetchCustomerSuccess( response );
+	        })
+	        .catch( error => {
+	            fetchCustomerError();
+	        })
     });
 }
