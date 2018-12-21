@@ -7,12 +7,19 @@ import {
     FETCH_ORDER_LINE_ITEMS_SUCCESS,
     FETCH_ORDER_LINE_ITEMS_ERROR,
 
+    ADD_ORDER_LINE_ITEM_LOADING,
+    ADD_ORDER_LINE_ITEM_SUCCESS,
+    ADD_ORDER_LINE_ITEM_ERROR,
+
+    SET_CURRENT_SELECTED_ORDER_ID,
+
     RESET_ORDER_LIST_STATE
 } from './../actions/order';
 
 import {
     fetchOrderListAPI,
-    fetchOrderLineItemsAPI
+    fetchOrderLineItemsAPI,
+    addOrderLineItemAPI
 } from './../apis/order';
 
 const fetchOrderListLoading = () => ({
@@ -42,6 +49,11 @@ export const fetchOrderList = ( reqData ) => {
     });
 }
 
+const setCurrentSelectedOrderId = ( orderId ) => ({
+    type: SET_CURRENT_SELECTED_ORDER_ID,
+    payload: orderId
+})
+
 const fetchOrderLineItemsLoading = () => ({
     type: FETCH_ORDER_LINE_ITEMS_LOADING
 });
@@ -61,12 +73,39 @@ export const fetchOrderLineItems = ( data ) => {
         
         return fetchOrderLineItemsAPI( data )
         .then( response => {
+            dispatch( setCurrentSelectedOrderId(response.data._id) );
             dispatch(fetchOrderLineItemsSuccess( response.data ));
         })
         .catch( error => {
             dispatch(fetchOrderLineItemsError());
         });
     });
+}
+
+const addOrderLineItemLoading = () => ({
+    type: ADD_ORDER_LINE_ITEM_LOADING
+});
+
+const addOrderLineItemSuccess = ( data ) => ({
+    type: ADD_ORDER_LINE_ITEM_SUCCESS
+});
+
+const addOrderLineItemError = () => ({
+    type: ADD_ORDER_LINE_ITEM_ERROR
+});
+
+export const addOrderLineItem = ( data ) => {
+    return ( dispatch => {
+        dispatch( addOrderLineItemLoading() );
+        return addOrderLineItemAPI( data )
+        .then( response => {
+            dispatch( addOrderLineItemSuccess( response ));
+            dispatch( fetchOrderLineItems( data.orderId ) );
+        })
+        .catch( error => {
+            dispatch( addOrderLineItemError());
+        });
+    })
 }
 
 export const updateOrderLineItem = ( reqData ) => ({

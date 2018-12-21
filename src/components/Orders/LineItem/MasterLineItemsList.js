@@ -3,33 +3,21 @@ import { connect } from "react-redux";
 import Loader from 'react-loader-spinner';
 import { Row, Col } from 'reactstrap';
 
-import SearchBox from "./../../common/SearchBox/SearchBox";
-import { fetchAllLineItems } from "./../../../actionCreators/lineItem";
+import SearchBox from "../../common/SearchBox/SearchBox";
+import { fetchMasterLineItems } from "../../../actionCreators/lineItem";
 
 
-class AllLineItemsList extends Component {
-    state = {
-        selectedLineItemId : null
-    }
-
-    handleItemSelection = ( e, lineItemId ) => {
-        e.stopPropagation();
-        this.setState({
-            selectedLineItemId: lineItemId
-        });
-    }
-
+class MasterLineItemsList extends Component {
     handleLineItemSearch = ( searchValue ) => {
-        console.log( searchValue );
+        this.props.fetchMasterLineItems( searchValue );
     }
 
     componentDidMount() {
-        this.props.fetchAllLineItems();
+        this.props.fetchMasterLineItems();
     }
 
     render() {
-        const { allLineItemList, isLoading } = this.props;
-        const { selectedLineItemId } = this.state;
+        const { masterLineItemList, isLoading, onItemSelect, selectedLineItemId } = this.props;
         return (
             <>
             {
@@ -52,8 +40,8 @@ class AllLineItemsList extends Component {
                         </div>
                         <div className="line-items-list mt-3">
                             {
-                                allLineItemList.map( lineItem => (
-                                    <div className="mb-3" key={ lineItem._id } onClick={(e) => this.handleItemSelection( e, lineItem._id ) }>
+                                masterLineItemList.map( lineItem => (
+                                    <div className="mb-3" key={ lineItem._id } onClick={(e) => onItemSelect( e, lineItem._id ) }>
                                         <Row noGutters={true}>
                                             <Col sm="1"></Col>
                                             <Col sm="4"  className="field-label">Item Name</Col>
@@ -63,7 +51,7 @@ class AllLineItemsList extends Component {
                                             <Col sm="1" className="pl-2">
                                                 <input type="radio"
                                                     checked={ lineItem._id === selectedLineItemId } 
-                                                    onChange={(e) => this.handleItemSelection( e, lineItem._id ) }
+                                                    onChange={(e) => onItemSelect( e, lineItem._id ) }
                                                 />
                                             </Col>
                                             <Col sm="4" className="field-value">{ lineItem.name }</Col>
@@ -82,12 +70,12 @@ class AllLineItemsList extends Component {
 }
 
 const mapStateToProps = ( state ) => ({
-    allLineItemList: state.lineItem.lineItemList,
+    masterLineItemList: state.lineItem.lineItemList,
     isLoading: state.lineItem.isLineItemListLoading
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-    fetchAllLineItems: () => dispatch( fetchAllLineItems() )
+    fetchMasterLineItems: ( searchValue ) => dispatch( fetchMasterLineItems( searchValue ) )
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )( AllLineItemsList );
+export default connect( mapStateToProps, mapDispatchToProps )( MasterLineItemsList );

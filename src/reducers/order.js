@@ -8,6 +8,10 @@ import {
     FETCH_ORDER_LINE_ITEMS_SUCCESS,
     FETCH_ORDER_LINE_ITEMS_ERROR,
 
+    ADD_ORDER_LINE_ITEM_SUCCESS,
+
+    SET_CURRENT_SELECTED_ORDER_ID,
+
     RESET_ORDER_LIST_STATE,
 } from "./../actions/order";
 
@@ -16,7 +20,8 @@ const initialState = {
     isOrderListLoading: false,
     showLineItemsPanel: false,
     isOrderLineItemsLoading: false,
-    orderLineItems: []
+    orderLineItems: [],
+    currentSelectedOrderId: null
 };
 
 export const orderReducer = ( state = initialState, action ) => {
@@ -31,7 +36,8 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false,
-                orderList: action.payload.orderList
+                orderList: action.payload.orderList,
+                currentSelectedOrderId: null
             };
 
         case FETCH_ORDER_LIST_ERROR:
@@ -60,6 +66,17 @@ export const orderReducer = ( state = initialState, action ) => {
                 ...state,
                 showLineItemsPanel: true,
                 isOrderLineItemsLoading: false
+            };
+
+        case ADD_ORDER_LINE_ITEM_SUCCESS:
+            return {
+                ...state
+            };
+
+        case SET_CURRENT_SELECTED_ORDER_ID:
+            return {
+                ...state,
+                currentSelectedOrderId: action.payload //"5c161c8982f0e64ee0bf6b67"
             };
 
         case RESET_ORDER_LIST_STATE:

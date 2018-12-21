@@ -1,31 +1,55 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
-import AllLineItemsList from "./AllLineItemsList";
+import MasterLineItemsList from "./MasterLineItemsList";
 import OrderLineItemList from "./OrderLineItemList";
+
+import { addOrderLineItem } from "./../../../actionCreators/order";
 
 import './lineItem.scss';
 
-export default class LineItemsWrapper extends Component {
+class LineItemsWrapper extends Component {
     state = {
-        showAllLineItemsPanel: false
+        showMasterLineItemsPanel: false,
+        selectedLineItemId: null
+    }
+
+    handleItemSelection = ( e, lineItemId ) => {
+        e.stopPropagation();
+        this.setState({
+            selectedLineItemId: lineItemId
+        });
     }
     
     handleLineItemsAddClick = () => {
-        if( this.state.showAllLineItemsPanel ) {
+        const { showMasterLineItemsPanel, selectedLineItemId } = this.state;
+        const { currentSelectedOrderId } = this.props;
+        if( showMasterLineItemsPanel ) {
+            if( selectedLineItemId ) {
+                const reqData = {
+                    item: selectedLineItemId,
+                    orderId: currentSelectedOrderId,
+                    itemQty: 1
+                };
+
+                this.props.addOrderLineItem( reqData );
+            }
+            
             this.setState({
-                showAllLineItemsPanel: false
+                showMasterLineItemsPanel: false,
+                selectedLineItemId: null
             });
         }
         else {
             this.setState({
-                showAllLineItemsPanel: true
+                showMasterLineItemsPanel: true
             });
         }
     }
 
     render() {
-        const { showAllLineItemsPanel } = this.state;
+        const { showMasterLineItemsPanel, selectedLineItemId } = this.state;
         return (
             <div className="line-items-wrapper">
                 <div className="line-items-header">
@@ -36,13 +60,13 @@ export default class LineItemsWrapper extends Component {
                             size="sm" 
                             onClick = { this.handleLineItemsAddClick }
                         >
-                            { !showAllLineItemsPanel && (
+                            { !showMasterLineItemsPanel && (
                                 <>
                                 <i className="fa fa-plus-circle btn-icon"></i>
                                 <span className="btn-text">Add</span>
                                 </>
                             )}
-                            { showAllLineItemsPanel && (
+                            { showMasterLineItemsPanel && (
                                 <>
                                 <i className="fa fa-save btn-icon"></i>
                                 <span className="btn-text">Save</span>
@@ -53,13 +77,28 @@ export default class LineItemsWrapper extends Component {
                 </div>
                 <div className="card-list-container">
                     {
-                        showAllLineItemsPanel && <AllLineItemsList/>
+                        showMasterLineItemsPanel && (
+                            <MasterLineItemsList 
+                                selectedLineItemId = { selectedLineItemId }
+                                onItemSelect = { this.handleItemSelection }
+                            />
+                        )
                     }
                     {
-                        !showAllLineItemsPanel && <OrderLineItemList/>
+                        !showMasterLineItemsPanel && <OrderLineItemList/>
                     }
                 </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = ( state ) => ({
+    currentSelectedOrderId: state.order.currentSelectedOrderId
+});
+
+const mapDispatchToProps = ( dispatch ) => ({
+    addOrderLineItem: ( lineItem ) => { dispatch( addOrderLineItem( lineItem )) } 
+})
+
+export default connect( mapStateToProps, mapDispatchToProps )(LineItemsWrapper);
