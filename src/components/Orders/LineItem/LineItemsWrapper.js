@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
-import AllLineItemsList from "./AllLineItemsList";
+import MasterLineItemsList from "./MasterLineItemsList";
 import OrderLineItemList from "./OrderLineItemList";
 
 import { addOrderLineItem } from "./../../../actionCreators/order";
@@ -11,7 +11,7 @@ import './lineItem.scss';
 
 class LineItemsWrapper extends Component {
     state = {
-        showAllLineItemsPanel: false,
+        showMasterLineItemsPanel: false,
         selectedLineItemId: null
     }
 
@@ -23,9 +23,9 @@ class LineItemsWrapper extends Component {
     }
     
     handleLineItemsAddClick = () => {
-        const { showAllLineItemsPanel, selectedLineItemId } = this.state;
+        const { showMasterLineItemsPanel, selectedLineItemId } = this.state;
         const { currentSelectedOrderId } = this.props;
-        if( showAllLineItemsPanel ) {
+        if( showMasterLineItemsPanel ) {
             if( selectedLineItemId ) {
                 const reqData = {
                     item: selectedLineItemId,
@@ -37,19 +37,19 @@ class LineItemsWrapper extends Component {
             }
             
             this.setState({
-                showAllLineItemsPanel: false,
+                showMasterLineItemsPanel: false,
                 selectedLineItemId: null
             });
         }
         else {
             this.setState({
-                showAllLineItemsPanel: true
+                showMasterLineItemsPanel: true
             });
         }
     }
 
     render() {
-        const { showAllLineItemsPanel, selectedLineItemId } = this.state;
+        const { showMasterLineItemsPanel, selectedLineItemId } = this.state;
         return (
             <div className="line-items-wrapper">
                 <div className="line-items-header">
@@ -60,13 +60,13 @@ class LineItemsWrapper extends Component {
                             size="sm" 
                             onClick = { this.handleLineItemsAddClick }
                         >
-                            { !showAllLineItemsPanel && (
+                            { !showMasterLineItemsPanel && (
                                 <>
                                 <i className="fa fa-plus-circle btn-icon"></i>
                                 <span className="btn-text">Add</span>
                                 </>
                             )}
-                            { showAllLineItemsPanel && (
+                            { showMasterLineItemsPanel && (
                                 <>
                                 <i className="fa fa-save btn-icon"></i>
                                 <span className="btn-text">Save</span>
@@ -77,15 +77,15 @@ class LineItemsWrapper extends Component {
                 </div>
                 <div className="card-list-container">
                     {
-                        showAllLineItemsPanel && (
-                            <AllLineItemsList 
+                        showMasterLineItemsPanel && (
+                            <MasterLineItemsList 
                                 selectedLineItemId = { selectedLineItemId }
                                 onItemSelect = { this.handleItemSelection }
                             />
                         )
                     }
                     {
-                        !showAllLineItemsPanel && <OrderLineItemList/>
+                        !showMasterLineItemsPanel && <OrderLineItemList/>
                     }
                 </div>
             </div>
