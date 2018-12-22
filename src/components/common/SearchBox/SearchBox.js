@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	InputGroup,
 	InputGroupAddon,
@@ -6,22 +6,36 @@ import {
 	Button,
 } from 'reactstrap';
 
-export default function SearchBox( props ) {
-	const searchInputElm = React.createRef();
+export default class SearchBox extends Component {
+	state = {
+		searchValue : ''
+	}
+
+	handleSearchInputChange = ( e ) => {
+		this.setState({
+			searchValue: e.target.value
+		});
+	}
+
+	searchInputElm = React.createRef();
 	
-	function handleSearchClick() {
-		const searchValue = searchInputElm.current.value;
-		props.onSearchClick( searchValue );
+	handleSearchClick = () => {
+		const searchValue = this.state.searchValue;
+		this.props.onSearchClick( searchValue );
 	}
 	
-	return(
-		<InputGroup className="h-100">
-			<Input className="h-100" color="secondary" placeholder="Search..." innerRef={searchInputElm}/>
-			<InputGroupAddon addonType="append">
-				<Button color="primary" onClick={ handleSearchClick }>
-					<i className="fa fa-search icon-white"></i>
-				</Button>
-			</InputGroupAddon>
-		</InputGroup>
-	);
+	render() {
+		const { searchValue } = this.state;
+		const searchDisabled = !searchValue;
+		return(
+			<InputGroup className="h-100">
+				<Input className="h-100" color="secondary" placeholder="Search..." value={ searchValue } onChange={ this.handleSearchInputChange }/>
+				<InputGroupAddon addonType="append">
+					<Button color="primary" onClick={ this.handleSearchClick } disabled = {searchDisabled}>
+						<i className="fa fa-search icon-white"></i>
+					</Button>
+				</InputGroupAddon>
+			</InputGroup>
+		);
+	}
 }
