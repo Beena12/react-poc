@@ -36,8 +36,11 @@ export const fetchCustomer = ( reqData ) => {
                 if( response.status === "200" && response.data ) {
                     const customerName = response.data.name;
                     const customerId = response.data._id;
+                    const orderReqObj = {
+                        customerId: customerId
+                    };
 
-                    dispatch( fetchOrderList( customerId ));
+                    dispatch( fetchOrderList( orderReqObj ));
                     dispatch( fetchCustomerSuccess( customerName ));
                 } else {
                     fetchCustomerError();

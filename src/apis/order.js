@@ -1,10 +1,7 @@
 
-export const fetchOrderListAPI = ( reqData ) => {
-//hardcoded for testing purpose as ....as fetching customer by cust_id isnt working 
-//    const url = `/orders/${ reqData.customerId }/?sort_by=${ reqData.sortBy}`;
-    const url = `/api/orders/?customer=5c14d24021c57b1395612915`;
-
-
+export const fetchOrderListAPI = ( reqData ) => { 
+    const url = `/api/orders/?customer=${ reqData.customerId }&sort_by=${ reqData.sortBy}`;
+    
     return fetch( url )
             .then( response => response.json());
 }
