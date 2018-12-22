@@ -36,10 +36,10 @@ class OrderLineItemList extends Component {
                     currOrderLineItems.map( lineItem => (
                         <CardItem
                             key = { lineItem.id }
-                            uom  = { lineItem.uom }
-                            cost = { lineItem.cost }
-                            description = { lineItem.description }
-                            units = { lineItem.units }
+                            uom  = { lineItem.item.uom }
+                            cost = { lineItem.item.cost }
+                            description = { lineItem.item.description }
+                            units = { lineItem.itemQty }
                             onUpdateClick = { this.handleUpdateClick } 
                             onDeleteClick = { this.handleDeleteClick }
                         />

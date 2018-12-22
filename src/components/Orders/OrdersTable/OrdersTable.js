@@ -32,6 +32,8 @@ class OrdersTable extends Component {
         const { height, width, orders } = this.props;
         const { selectedRowIndex } = this.state;
 
+    console.log("Orders data fetched -----", this.props.orders);
+    
         return (
             <VirtualTable
                 columns = { ordersTableColumns }

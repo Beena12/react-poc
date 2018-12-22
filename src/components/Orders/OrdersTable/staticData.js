@@ -31,7 +31,7 @@ const cellRenderer = ({cellData}) => {
 
 export const ordersTableColumns = [
     {
-        key            : "order_no",
+        key            : "order_id",
         label          : "Order No",
         widthFactor    : 0.15,
         headerRenderer : headerRenderer,
@@ -59,21 +59,21 @@ export const ordersTableColumns = [
         cellRenderer   : cellRenderer
     },
     {
-        key            : "created_by",
+        key            : "createdBy",
         label          : "Created By",
         widthFactor    : 0.25,
         headerRenderer : headerRenderer,
         cellRenderer   : cellRenderer
     },
     {
-        key            : "is_picked",
+        key            : "picked",
         label          : "Picked",
         widthFactor    : 0.1,
         headerRenderer : headerRenderer,
         cellRenderer   : cellRenderer
     },
     {
-        key            : "is_shipped",
+        key            : "shipped",
         label          : "Shipped",
         widthFactor    : 0.1,
         headerRenderer : headerRenderer,

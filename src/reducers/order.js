@@ -16,7 +16,8 @@ import {
 } from "./../actions/order";
 
 const initialState = {
-    orderList: mockedOrdersList, // Need to remove mockedOrdersList once API is ready: []
+    orderList:  mockedOrdersList,
+    rowCount: 0,
     isOrderListLoading: false,
     showLineItemsPanel: false,
     isOrderLineItemsLoading: false,
@@ -36,7 +37,8 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false,
-                orderList: action.payload.orderList,
+                orderList: action.payload,  
+                rowCount: action.payload.length,              
                 currentSelectedOrderId: null
             };
 
