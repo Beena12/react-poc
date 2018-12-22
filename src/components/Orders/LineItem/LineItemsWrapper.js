@@ -28,6 +28,9 @@ class LineItemsWrapper extends Component {
         const { currentSelectedOrderId, showOrderLineItems, fetchMasterLineItems, hideOrderLineItems } = this.props;
         if( showOrderLineItems ) {
             /* Open the master items list */
+            this.setState({
+                selectedLineItemId: null // Before showing the master line-item list just making sure no item should be selected by default
+            });
             hideOrderLineItems();
             fetchMasterLineItems();
         }
@@ -42,10 +45,6 @@ class LineItemsWrapper extends Component {
 
                 this.props.addOrderLineItem( reqData );
             }
-            
-            this.setState({
-                selectedLineItemId: null
-            });
         }
     }
 
