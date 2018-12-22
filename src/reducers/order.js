@@ -1,4 +1,4 @@
-import { mockedOrdersList } from "./../mocks/order"; // Need to remove this once API is ready
+// import { mockedOrdersList } from "./../mocks/order"; // Need to remove this once API is ready
 import { 
     FETCH_ORDER_LIST_LOADING,
     FETCH_ORDER_LIST_SUCCESS,
@@ -12,17 +12,22 @@ import {
 
     SET_CURRENT_SELECTED_ORDER_ID,
 
+    HIDE_ORDER_LINE_ITEMS_STATE,
+
     RESET_ORDER_LIST_STATE,
 } from "./../actions/order";
 
 const initialState = {
-    orderList:  mockedOrdersList,
+    orderList:  [],
     rowCount: 0,
     isOrderListLoading: false,
+    currentSelectedOrderId: null,
+    
     showLineItemsPanel: false,
+    
+    showOrderLineItems: false,
     isOrderLineItemsLoading: false,
     orderLineItems: [],
-    currentSelectedOrderId: null
 };
 
 export const orderReducer = ( state = initialState, action ) => {
@@ -52,6 +57,7 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 showLineItemsPanel: true,
+                showOrderLineItems: true,
                 isOrderLineItemsLoading: true
             };
 
@@ -59,6 +65,7 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 showLineItemsPanel: true,
+                showOrderLineItems: true,
                 isOrderLineItemsLoading: false,
                 orderLineItems: action.payload
             };
@@ -67,6 +74,7 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 showLineItemsPanel: true,
+                showOrderLineItems: true,
                 isOrderLineItemsLoading: false
             };
 
@@ -78,7 +86,13 @@ export const orderReducer = ( state = initialState, action ) => {
         case SET_CURRENT_SELECTED_ORDER_ID:
             return {
                 ...state,
-                currentSelectedOrderId: action.payload //"5c161c8982f0e64ee0bf6b67"
+                currentSelectedOrderId: action.payload 
+            };
+
+        case HIDE_ORDER_LINE_ITEMS_STATE:
+            return {
+                ...state,
+                showOrderLineItems: false
             };
 
         case RESET_ORDER_LIST_STATE:

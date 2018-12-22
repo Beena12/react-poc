@@ -35,7 +35,7 @@ class OrderLineItemList extends Component {
                 !isLoading && (currOrderLineItems.length > 0) && (
                     currOrderLineItems.map( lineItem => (
                         <CardItem
-                            key = { lineItem.id }
+                            key = { lineItem._id }
                             uom  = { lineItem.item.uom }
                             cost = { lineItem.item.cost }
                             description = { lineItem.item.description }

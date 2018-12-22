@@ -13,6 +13,8 @@ import {
 
     SET_CURRENT_SELECTED_ORDER_ID,
 
+    HIDE_ORDER_LINE_ITEMS_STATE,
+
     RESET_ORDER_LIST_STATE
 } from './../actions/order';
 
@@ -110,6 +112,11 @@ export const addOrderLineItem = ( data ) => {
 
 export const updateOrderLineItem = ( reqData ) => ({
     
+});
+
+
+export const hideOrderLineItems = () => ({
+    type: HIDE_ORDER_LINE_ITEMS_STATE
 });
 
 export const resetOrderListState = () => ({

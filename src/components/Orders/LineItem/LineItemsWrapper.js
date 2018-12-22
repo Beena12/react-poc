@@ -6,12 +6,13 @@ import MasterLineItemsList from "./MasterLineItemsList";
 import OrderLineItemList from "./OrderLineItemList";
 
 import { addOrderLineItem } from "./../../../actionCreators/order";
+import { hideOrderLineItems } from "./../../../actionCreators/order";
+import { fetchMasterLineItems } from "../../../actionCreators/lineItem";
 
 import './lineItem.scss';
 
 class LineItemsWrapper extends Component {
     state = {
-        showMasterLineItemsPanel: false,
         selectedLineItemId: null
     }
 
@@ -23,9 +24,15 @@ class LineItemsWrapper extends Component {
     }
     
     handleLineItemsAddClick = () => {
-        const { showMasterLineItemsPanel, selectedLineItemId } = this.state;
-        const { currentSelectedOrderId } = this.props;
-        if( showMasterLineItemsPanel ) {
+        const { selectedLineItemId } = this.state;
+        const { currentSelectedOrderId, showOrderLineItems, fetchMasterLineItems, hideOrderLineItems } = this.props;
+        if( showOrderLineItems ) {
+            /* Open the master items list */
+            hideOrderLineItems();
+            fetchMasterLineItems();
+        }
+        else {
+            /* Add an item to Order */
             if( selectedLineItemId ) {
                 const reqData = {
                     item: selectedLineItemId,
@@ -37,19 +44,14 @@ class LineItemsWrapper extends Component {
             }
             
             this.setState({
-                showMasterLineItemsPanel: false,
                 selectedLineItemId: null
-            });
-        }
-        else {
-            this.setState({
-                showMasterLineItemsPanel: true
             });
         }
     }
 
     render() {
-        const { showMasterLineItemsPanel, selectedLineItemId } = this.state;
+        const { selectedLineItemId } = this.state;
+        const { showOrderLineItems } = this.props;
         return (
             <div className="line-items-wrapper">
                 <div className="line-items-header">
@@ -60,13 +62,13 @@ class LineItemsWrapper extends Component {
                             size="sm" 
                             onClick = { this.handleLineItemsAddClick }
                         >
-                            { !showMasterLineItemsPanel && (
+                            { showOrderLineItems && (
                                 <>
                                 <i className="fa fa-plus-circle btn-icon"></i>
                                 <span className="btn-text">Add</span>
                                 </>
                             )}
-                            { showMasterLineItemsPanel && (
+                            { !showOrderLineItems && (
                                 <>
                                 <i className="fa fa-save btn-icon"></i>
                                 <span className="btn-text">Save</span>
@@ -77,7 +79,7 @@ class LineItemsWrapper extends Component {
                 </div>
                 <div className="card-list-container">
                     {
-                        showMasterLineItemsPanel && (
+                        !showOrderLineItems && (
                             <MasterLineItemsList 
                                 selectedLineItemId = { selectedLineItemId }
                                 onItemSelect = { this.handleItemSelection }
@@ -85,7 +87,7 @@ class LineItemsWrapper extends Component {
                         )
                     }
                     {
-                        !showMasterLineItemsPanel && <OrderLineItemList/>
+                        showOrderLineItems && <OrderLineItemList/>
                     }
                 </div>
             </div>
@@ -94,10 +96,13 @@ class LineItemsWrapper extends Component {
 }
 
 const mapStateToProps = ( state ) => ({
-    currentSelectedOrderId: state.order.currentSelectedOrderId
+    currentSelectedOrderId: state.order.currentSelectedOrderId,
+    showOrderLineItems: state.order.showOrderLineItems
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
+    hideOrderLineItems: () => { dispatch( hideOrderLineItems()) },
+    fetchMasterLineItems: () => { dispatch( fetchMasterLineItems()) },
     addOrderLineItem: ( lineItem ) => { dispatch( addOrderLineItem( lineItem )) } 
 })
 

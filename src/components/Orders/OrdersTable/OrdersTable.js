@@ -25,14 +25,12 @@ class OrdersTable extends Component {
         this.setState({
             selectedRowIndex: index
         });
-        this.props.fetchOrderLineItems( rowData.order_no );
+        this.props.fetchOrderLineItems( rowData._id );
     }
     
     render() {
         const { height, width, orders } = this.props;
         const { selectedRowIndex } = this.state;
-
-    console.log("Orders data fetched -----", this.props.orders);
     
         return (
             <VirtualTable

@@ -12,10 +12,6 @@ class MasterLineItemsList extends Component {
         this.props.fetchMasterLineItems( searchValue );
     }
 
-    componentDidMount() {
-        this.props.fetchMasterLineItems();
-    }
-
     render() {
         const { masterLineItemList, isLoading, onItemSelect, selectedLineItemId } = this.props;
         return (
