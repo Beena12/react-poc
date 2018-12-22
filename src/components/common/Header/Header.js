@@ -12,37 +12,41 @@ function Header(props) {
     
     function handleCustomerSearchClick( searchVal ) {
         props.fetchCustomer( searchVal );   
-        console.log("Customer fetched Name - ", props.customer_name);
-
     }
 
-        return (
-            <div className="header">
-                <div className="customer-section">
-                        <div className="customer-title"> Customer Lookup </div>
-                        <div className="customer-name"> Customer name : </div>
-                </div>
-                <div className="avatar-container">
-                    <UserAvatar 
-                        size="50" 
-                        name="Dan Abramov" 
-                        src="https://pbs.twimg.com/profile_images/906557353549598720/oapgW_Fp_bigger.jpg"
-                    />
-                </div>
-                <div className="searchbox-container">
-                    <SearchBox onSearchClick = {handleCustomerSearchClick}/>
-                </div>
-                
+    return (
+        <div className="header">
+            <div className="customer-section">
+                    <div className="customer-title"> Customer Lookup </div>
+                    <div className="customer-name">
+                        {
+                            props.customerName && (<>Customer name : { props.customerName }</>)
+                        }
+                        {
+                            !props.customerName && (<>Search for customer to see orders</>) 
+                        }
+                    </div>
             </div>
-        );        
+            <div className="avatar-container">
+                <UserAvatar 
+                    size="50" 
+                    name="Dan Abramov" 
+                    src="https://pbs.twimg.com/profile_images/906557353549598720/oapgW_Fp_bigger.jpg"
+                />
+            </div>
+            <div className="searchbox-container">
+                <SearchBox onSearchClick = {handleCustomerSearchClick}/>
+            </div>
+        </div>
+    );        
 }
 
 const mapStateToProps = ( state ) => ({
-    customer_name: state.customer_name
+    customerName: state.header.customerName
 });
 
 const mapDispatchToProps = ( dispatch ) => ({    
-         fetchCustomer: ( reqData ) => dispatch( fetchCustomer(reqData) )     
+    fetchCustomer: ( reqData ) => dispatch( fetchCustomer(reqData) )     
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( Header );

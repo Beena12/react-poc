@@ -8,18 +8,17 @@
         .customer-section {
             height: $header-height;
             float:left;
-            line-height: $header-height;             
+            // line-height: $header-height;             
             font-size: 15px;
             .customer-title {
-                height: 25%;
-                font-size: 13px;                
+                height: 30%;
+                font-size: 12px;                
                 padding: 5px;
             }
             .customer-name {
-                height: 25%;
+                height: 70%;
                 padding: 5px;
-                font-size: 15px;                
-
+                font-size: 18px;
             }
         }
 
