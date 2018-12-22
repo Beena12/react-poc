@@ -21,12 +21,12 @@ const getDate = ( days ) => {
 
 export const mockedOrdersList = Array(500).fill().map((val, idx) => {
     return {
-        order_no    : 3553452 - idx, 
-        date        : getDate( idx ),
+        order_id    : 3553452 - idx, 
+        createdOn        : getDate( idx ),
         zip         : "83234",
         state       : "AZ",
-        created_by  : "Jane Doe",
-        is_picked   : "Yes",
-        is_shipped  : "Yes"
+        createdBy  : "Jane Doe",
+        picked   : "Yes",
+        shipped   : "Yes"
     };
 });

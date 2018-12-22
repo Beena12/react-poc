@@ -26,9 +26,9 @@ const fetchOrderListLoading = () => ({
     type: FETCH_ORDER_LIST_LOADING
 });
 
-const fetchOrderListSuccess = ( response ) => ({
+const fetchOrderListSuccess = ( orderList ) => ({
     type: FETCH_ORDER_LIST_SUCCESS,
-    payload: response
+    payload: orderList
 });
 
 const fetchOrderListError = () => ({
@@ -41,7 +41,7 @@ export const fetchOrderList = ( reqData ) => {
         
         return fetchOrderListAPI( reqData )
         .then( response => {
-            dispatch(fetchOrderListSuccess( response ));
+            dispatch(fetchOrderListSuccess( response.data ));
         })
         .catch( error => {
             dispatch(fetchOrderListError());

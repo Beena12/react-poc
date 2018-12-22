@@ -12,6 +12,8 @@ function Header(props) {
     
     function handleCustomerSearchClick( searchVal ) {
         props.fetchCustomer( searchVal );   
+        console.log("Customer fetched Name - ", props.customer_name);
+
     }
 
         return (

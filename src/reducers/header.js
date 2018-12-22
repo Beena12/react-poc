@@ -6,10 +6,8 @@ import {
 } from "./../actions/customer";
 
 const initialState = {
-    
-    customer_name: "some name",
+    customer_name: " ",
     isCustomerLoading: false,
-
 };
 
 export const headerReducer = ( state = initialState, action ) => {
@@ -24,7 +22,7 @@ export const headerReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isCustomerLoading: false,
-                customer_name: action.payload.name
+                customer_name: action.payload
             };
 
         case FETCH_CUSTOMER_ERROR:

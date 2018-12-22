@@ -19,7 +19,7 @@ const fetchCustomerLoading = () => ({
 
 const fetchCustomerSuccess = ( response ) => ({
     type: FETCH_CUSTOMER_SUCCESS,
-    payload: response.name
+    payload: response
 });
 
 const fetchCustomerError = () => ({
@@ -29,10 +29,14 @@ const fetchCustomerError = () => ({
 
 export const fetchCustomer = ( reqData ) => {
     return ( dispatch => {
+        dispatch( fetchCustomerLoading() );
+
         return fetchCustomerAPI( reqData )
 	        .then( response => {
-	            dispatch(fetchOrderList( response.cust_id ));
-                fetchCustomerSuccess( response.data );                
+
+                dispatch(fetchOrderList( response.data ));
+                dispatch(fetchCustomerSuccess( response.data ));                
+
 	        })
 	        .catch( error => {
 	            fetchCustomerError();
