@@ -17,8 +17,6 @@ export default class SearchBox extends Component {
 		});
 	}
 
-	searchInputElm = React.createRef();
-	
 	handleSearchClick = () => {
 		const searchValue = this.state.searchValue;
 		this.props.onSearchClick( searchValue );
@@ -26,7 +24,9 @@ export default class SearchBox extends Component {
 	
 	render() {
 		const { searchValue } = this.state;
-		const searchDisabled = !searchValue;
+		const { allowEmptySearch } = this.props;
+		const searchDisabled = !allowEmptySearch && !searchValue;
+		
 		return(
 			<InputGroup className="h-100">
 				<Input className="h-100" color="secondary" placeholder="Search..." value={ searchValue } onChange={ this.handleSearchInputChange }/>

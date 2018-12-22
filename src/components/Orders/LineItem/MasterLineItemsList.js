@@ -32,7 +32,7 @@ class MasterLineItemsList extends Component {
                 !isLoading && (
                     <>
                         <div className="line-item-searchbox-container">
-                            <SearchBox onSearchClick = { this.handleLineItemSearch }/>
+                            <SearchBox onSearchClick = { this.handleLineItemSearch } allowEmptySearch = {true}/>
                         </div>
                         <div className="line-items-list mt-3">
                             {
