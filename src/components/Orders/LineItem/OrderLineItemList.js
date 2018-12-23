@@ -36,6 +36,7 @@ class OrderLineItemList extends Component {
                     currOrderLineItems.map( lineItem => (
                         <CardItem
                             key = { lineItem._id }
+                            name = { lineItem.item.name }
                             uom  = { lineItem.item.uom }
                             cost = { lineItem.item.cost }
                             description = { lineItem.item.description }

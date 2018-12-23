@@ -32,12 +32,12 @@ export default class CardItem extends Component {
     }
 
     render() {
-        const { uom, cost, units, description, onDeleteClick } = this.props;
+        const { uom, cost, units, name, description, onDeleteClick } = this.props;
         const { isEditMode } = this.state;
         return (
             <div className="card-item">
                 <div className="card-item-header">
-                    <span className="item-name">Item1</span>
+                    <span className="item-name">{name}</span>
                     <div className="buttons-wrap float-right">
                         <Button 
                             color="secondary"

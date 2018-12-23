@@ -18,7 +18,11 @@ export const addOrderLineItemAPI = ( reqData ) => {
     
     return fetch( url, {
                 body: JSON.stringify(reqData), 
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
             })
             .then( response => response.json());
 }
