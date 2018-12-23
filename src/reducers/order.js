@@ -12,6 +12,10 @@ import {
     DELETE_ORDER_LINE_ITEM_SUCCESS,
     DELETE_ORDER_LINE_ITEM_ERROR,
 
+    UPDATE_ORDER_LINE_ITEM_LOADING,
+    UPDATE_ORDER_LINE_ITEM_SUCCESS,
+    UPDATE_ORDER_LINE_ITEM_ERROR,
+
     ADD_ORDER_LINE_ITEM_SUCCESS,
 
     SET_CURRENT_SELECTED_ORDER_ID,
@@ -116,6 +120,45 @@ export const orderReducer = ( state = initialState, action ) => {
                     return lineItem;
                 })
             };
+
+        case UPDATE_ORDER_LINE_ITEM_LOADING:
+            return {
+                ...state,
+                orderLineItems: state.orderLineItems.map( lineItem => {
+                    if( lineItem._id === action.payload ) {
+                        lineItem = {
+                            ...lineItem,
+                            isUpdateInProgress: true
+                        };
+                    }
+                    return lineItem;
+                })
+            };
+
+        case UPDATE_ORDER_LINE_ITEM_SUCCESS:
+            return {
+                ...state,
+                orderLineItems: state.orderLineItems.map( lineItem => {
+                    if( lineItem._id === action.payload._id ) {
+                        lineItem = action.payload
+                    }
+                    return lineItem;
+                })
+            }
+
+        case UPDATE_ORDER_LINE_ITEM_ERROR:
+            return {
+                ...state,
+                orderLineItems: state.orderLineItems.map( lineItem => {
+                    if( lineItem._id === action.payload ) {
+                        lineItem = {
+                            ...lineItem,
+                            isUpdateInProgress: false
+                        };
+                    }
+                    return lineItem;
+                })
+            }
 
         case ADD_ORDER_LINE_ITEM_SUCCESS:
             return {

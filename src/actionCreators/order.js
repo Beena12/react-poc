@@ -15,6 +15,10 @@ import {
     DELETE_ORDER_LINE_ITEM_SUCCESS,
     DELETE_ORDER_LINE_ITEM_ERROR,
 
+    UPDATE_ORDER_LINE_ITEM_LOADING,
+    UPDATE_ORDER_LINE_ITEM_SUCCESS,
+    UPDATE_ORDER_LINE_ITEM_ERROR,
+
     SET_CURRENT_SELECTED_ORDER_ID,
 
     HIDE_ORDER_LINE_ITEMS_STATE,
@@ -26,7 +30,8 @@ import {
     fetchOrderListAPI,
     fetchOrderLineItemsAPI,
     addOrderLineItemAPI,
-    deleteOrderLineItemAPI
+    deleteOrderLineItemAPI,
+    updateOrderLineItemAPI
 } from './../apis/order';
 
 const fetchOrderListLoading = () => ({
@@ -115,8 +120,32 @@ export const addOrderLineItem = ( data ) => {
     });
 }
 
+const updateOrderLineItemLoading = ( itemId ) => ({
+    type: UPDATE_ORDER_LINE_ITEM_LOADING,
+    payload: itemId
+});
+
+const updateOrderLineItemSuccess = ( updatedLineItem ) => ({
+    type: UPDATE_ORDER_LINE_ITEM_SUCCESS,
+    payload: updatedLineItem
+});
+
+const updateOrderLineItemError = ( itemId ) => ({
+    type: UPDATE_ORDER_LINE_ITEM_ERROR,
+    payload: itemId
+});
+
 export const updateOrderLineItem = ( reqData ) => {
-    
+    return ( dispatch => {
+        dispatch( updateOrderLineItemLoading( reqData.orderLineItemId ));
+        return updateOrderLineItemAPI( reqData )
+        .then( response => {
+            dispatch( updateOrderLineItemSuccess( response.data ) );
+        })
+        .catch( error => {
+            dispatch( updateOrderLineItemError( reqData.orderLineItemId ) );
+        });
+    });
 };
 
 const deleteOrderLineItemLoading = ( itemId ) => ({

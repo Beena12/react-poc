@@ -35,3 +35,20 @@ export const deleteOrderLineItemAPI = ( reqData ) => {
             })
             .then( response => response.json());
 }
+
+export const updateOrderLineItemAPI = ( reqData ) => {
+    const url = `/api/orderitems/?itemId=${ reqData.orderLineItemId }&orderId=${ reqData.orderId }`;
+    const reqObj = {
+        itemQty: reqData.itemQty
+    };
+
+    return fetch( url, {
+                method: 'PUT',
+                body: JSON.stringify(reqObj),
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then( response => response.json());
+}
