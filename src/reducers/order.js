@@ -43,7 +43,8 @@ export const orderReducer = ( state = initialState, action ) => {
         case FETCH_ORDER_LIST_LOADING:
             return {
                 ...state,
-                isOrderListLoading: true
+                isOrderListLoading: true,
+                showLineItemsPanel: false
             };
 
         case FETCH_ORDER_LIST_SUCCESS:
