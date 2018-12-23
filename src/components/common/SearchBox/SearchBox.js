@@ -19,7 +19,9 @@ export default class SearchBox extends Component {
 
 	handleSearchClick = () => {
 		const searchValue = this.state.searchValue;
-		this.props.onSearchClick( searchValue );
+		if( searchValue ) {
+			this.props.onSearchClick( searchValue );
+		}
 	}
 	
 	render() {
@@ -29,7 +31,13 @@ export default class SearchBox extends Component {
 		
 		return(
 			<InputGroup className="h-100">
-				<Input className="h-100" color="secondary" placeholder="Search..." value={ searchValue } onChange={ this.handleSearchInputChange }/>
+				<Input className="h-100" 
+					color="secondary" 
+					placeholder="Search..." 
+					value={ searchValue } 
+					onChange={ this.handleSearchInputChange } 
+					onKeyPress={ this.handleSearchClick }
+				/>
 				<InputGroupAddon addonType="append">
 					<Button color="primary" onClick={ this.handleSearchClick } disabled = {searchDisabled}>
 						<i className="fa fa-search icon-white"></i>
