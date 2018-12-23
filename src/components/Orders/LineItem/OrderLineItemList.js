@@ -18,7 +18,7 @@ class OrderLineItemList extends Component {
     render() {
         const { currOrderLineItems, isLoading } = this.props;
         return (
-            <>
+            <div className="card-list-container">
             {
                 isLoading && (
                     <div className="d-flex align-items-center justify-content-center h-100">
@@ -53,7 +53,7 @@ class OrderLineItemList extends Component {
                     </div>
                 )
             }
-            </>
+            </div>
         );
     }
 }

@@ -1,5 +1,6 @@
 @import './../../common/variables.scss';
 $line-items-header-height : 50px;
+$master-lineItem-searchbox-height: 50px;
 
 .line-items-wrapper {
     height: 100%;
@@ -21,14 +22,6 @@ $line-items-header-height : 50px;
 
     .field-value {
         font-size: 14px;
-    }
-
-    .line-item-searchbox-container {
-        height: 50px;
-        input.form-control {
-            border-top-width: 0;
-            border-left-width: 0;
-        }
     }
 
     .line-items-header {
@@ -81,5 +74,23 @@ $line-items-header-height : 50px;
                 width: 60px;
             }
         }
+    }
+
+    .master-item-list-container {
+        height: calc(100vh - #{$header-height} - #{$line-items-header-height});
+    }
+
+    .master-line-item-searchbox-container {
+        height: $master-lineItem-searchbox-height;
+        input.form-control {
+            border-top-width: 0;
+            border-left-width: 0;
+        }
+    }
+
+    .master-line-items-list {
+        height: calc(100% - #{$master-lineItem-searchbox-height});
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }

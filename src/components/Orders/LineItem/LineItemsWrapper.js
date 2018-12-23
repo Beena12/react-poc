@@ -76,19 +76,17 @@ class LineItemsWrapper extends Component {
                         </Button>
                     </div>
                 </div>
-                <div className="card-list-container">
-                    {
-                        !showOrderLineItems && (
-                            <MasterLineItemsList 
-                                selectedLineItemId = { selectedLineItemId }
-                                onItemSelect = { this.handleItemSelection }
-                            />
-                        )
-                    }
-                    {
-                        showOrderLineItems && <OrderLineItemList/>
-                    }
-                </div>
+                {
+                    !showOrderLineItems && (
+                        <MasterLineItemsList 
+                            selectedLineItemId = { selectedLineItemId }
+                            onItemSelect = { this.handleItemSelection }
+                        />
+                    )
+                }
+                {
+                    showOrderLineItems && <OrderLineItemList/>
+                }
             </div>
         );
     }
