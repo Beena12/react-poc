@@ -8,6 +8,10 @@ import {
     FETCH_ORDER_LINE_ITEMS_SUCCESS,
     FETCH_ORDER_LINE_ITEMS_ERROR,
 
+    DELETE_ORDER_LINE_ITEM_LOADING,
+    DELETE_ORDER_LINE_ITEM_SUCCESS,
+    DELETE_ORDER_LINE_ITEM_ERROR,
+
     ADD_ORDER_LINE_ITEM_SUCCESS,
 
     SET_CURRENT_SELECTED_ORDER_ID,
@@ -76,6 +80,41 @@ export const orderReducer = ( state = initialState, action ) => {
                 showLineItemsPanel: true,
                 showOrderLineItems: true,
                 isOrderLineItemsLoading: false
+            };
+
+        case DELETE_ORDER_LINE_ITEM_LOADING:
+            return {
+                ...state,
+                orderLineItems: state.orderLineItems.map( lineItem => {
+                    if( lineItem._id === action.payload ) {
+                        lineItem = {
+                            ...lineItem,
+                            isDeleteInProgress: true
+                        };
+                    }
+                    return lineItem;
+                })
+            }
+
+        case DELETE_ORDER_LINE_ITEM_SUCCESS:
+            const deleteOrderItemId = action.payload.deleteOrderItemId;
+            return {
+                ...state,
+                orderLineItems: state.orderLineItems.filter( lineItem => lineItem._id !== deleteOrderItemId )
+            };
+
+        case DELETE_ORDER_LINE_ITEM_ERROR:
+            return {
+                ...state,
+                orderLineItems: state.orderLineItems.map( lineItem => {
+                    if( lineItem._id === action.payload ) {
+                        lineItem = {
+                            ...lineItem,
+                            isDeleteInProgress: false
+                        };
+                    }
+                    return lineItem;
+                })
             };
 
         case ADD_ORDER_LINE_ITEM_SUCCESS:

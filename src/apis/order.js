@@ -17,12 +17,21 @@ export const addOrderLineItemAPI = ( reqData ) => {
     const url = `/api/orderitems`;
     
     return fetch( url, {
-                body: JSON.stringify(reqData), 
                 method: 'POST',
+                body: JSON.stringify(reqData),
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 }
+            })
+            .then( response => response.json());
+}
+
+export const deleteOrderLineItemAPI = ( reqData ) => {
+    const url = `/api/orderitems/?itemId=${ reqData.orderLineItemId }&orderId=${ reqData.orderId }`;
+
+    return fetch( url, {
+                method: 'DELETE'
             })
             .then( response => response.json());
 }

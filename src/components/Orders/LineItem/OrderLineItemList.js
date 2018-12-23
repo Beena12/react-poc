@@ -5,14 +5,19 @@ import Loader from 'react-loader-spinner';
 import CardItem from "./CardItem";
 
 import { updateOrderLineItem } from "./../../../actionCreators/order";
+import { deleteOrderLineItem } from "./../../../actionCreators/order";
 
 class OrderLineItemList extends Component {
     handleUpdateClick = ( data ) => {
 
     }
 
-    handleDeleteClick = ( data ) => {
-        
+    handleDeleteClick = ( lineItem ) => {
+        const deleteReqData = {
+            orderLineItemId: lineItem._id,
+            orderId: this.props.currOrderId
+        };
+        this.props.deleteOrderLineItem( deleteReqData );
     }
 
     render() {
@@ -41,8 +46,9 @@ class OrderLineItemList extends Component {
                             cost = { lineItem.item.cost }
                             description = { lineItem.item.description }
                             units = { lineItem.itemQty }
+                            isDeleteInProgress = { lineItem.isDeleteInProgress }
                             onUpdateClick = { this.handleUpdateClick } 
-                            onDeleteClick = { this.handleDeleteClick }
+                            onDeleteClick = { () => this.handleDeleteClick( lineItem ) }
                         />
                     ))
                 )
@@ -60,12 +66,14 @@ class OrderLineItemList extends Component {
 }
 
 const mapStateToProps = ( state ) => ({
+    currOrderId: state.order.currentSelectedOrderId,
     currOrderLineItems: state.order.orderLineItems,
     isLoading: state.order.isOrderLineItemsLoading
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-    updateOrderLineItem: ( reqData ) => dispatch( updateOrderLineItem( reqData ))
+    updateOrderLineItem: ( reqData ) => dispatch( updateOrderLineItem( reqData )),
+    deleteOrderLineItem: ( reqData ) => dispatch( deleteOrderLineItem( reqData ))
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( OrderLineItemList );
