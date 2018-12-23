@@ -19,10 +19,7 @@ export default class CardItem extends Component {
     handleEditClick = () => {
         if ( this.state.isEditMode ) {
             const inputValue = this.unitsInputElm.current.value;
-            const data = {
-                units: inputValue
-            };
-            this.props.onUpdateClick( data );
+            this.props.onUpdateClick( inputValue );
         }
         else {
             this.setState({
@@ -33,7 +30,7 @@ export default class CardItem extends Component {
     }
 
     render() {
-        const { uom, cost, units, name, description, isDeleteInProgress, onDeleteClick } = this.props;
+        const { uom, cost, units, name, description, isDeleteInProgress, onDeleteClick, isUpdateInProgress } = this.props;
         const { isEditMode } = this.state;
         return (
             <div className="card-item">
@@ -44,7 +41,7 @@ export default class CardItem extends Component {
                             color="secondary"
                             size="sm"
                             className="item-button"
-                            disabled = { isDeleteInProgress }
+                            disabled = { isDeleteInProgress || isUpdateInProgress }
                             onClick = { onDeleteClick }
                         >
                             <i className="fa fa-trash"></i>
@@ -53,7 +50,7 @@ export default class CardItem extends Component {
                             color="primary"
                             size="sm"
                             className="item-button"
-                            disabled = { isDeleteInProgress }
+                            disabled = { isDeleteInProgress || isUpdateInProgress }
                             onClick = { this.handleEditClick }
                         >
                             { !isEditMode && <i className="fa fa-edit"></i>}
@@ -63,7 +60,7 @@ export default class CardItem extends Component {
                 </div>
                 <div className="card-item-body">
                     {
-                        isDeleteInProgress && (
+                        (isDeleteInProgress || isUpdateInProgress) && (
                             <div className="d-flex align-items-center justify-content-center h-230">
                                 <Loader 
                                     type="Bars"
@@ -75,7 +72,7 @@ export default class CardItem extends Component {
                         )
                     }
                     {
-                        !isDeleteInProgress && (
+                        (!isDeleteInProgress && !isUpdateInProgress) && (
                             <>
                             <Row>
                                 <Col sm="12" className="mb-2">

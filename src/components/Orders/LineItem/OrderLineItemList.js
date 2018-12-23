@@ -4,12 +4,20 @@ import Loader from 'react-loader-spinner';
 
 import CardItem from "./CardItem";
 
-import { updateOrderLineItem } from "./../../../actionCreators/order";
-import { deleteOrderLineItem } from "./../../../actionCreators/order";
+import { 
+    updateOrderLineItem, 
+    deleteOrderLineItem
+} from "./../../../actionCreators/order";
+
 
 class OrderLineItemList extends Component {
-    handleUpdateClick = ( data ) => {
-
+    handleUpdateClick = ( itemQty, lineItem ) => {
+        const updateReqData = {
+            orderLineItemId: lineItem._id,
+            orderId: this.props.currOrderId,
+            itemQty: itemQty
+        };
+        this.props.updateOrderLineItem( updateReqData );
     }
 
     handleDeleteClick = ( lineItem ) => {
@@ -46,8 +54,9 @@ class OrderLineItemList extends Component {
                             cost = { lineItem.item.cost }
                             description = { lineItem.item.description }
                             units = { lineItem.itemQty }
+                            isUpdateInProgress = { lineItem.isUpdateInProgress }
                             isDeleteInProgress = { lineItem.isDeleteInProgress }
-                            onUpdateClick = { this.handleUpdateClick } 
+                            onUpdateClick = { (itemQty) => this.handleUpdateClick( itemQty, lineItem ) } 
                             onDeleteClick = { () => this.handleDeleteClick( lineItem ) }
                         />
                     ))
