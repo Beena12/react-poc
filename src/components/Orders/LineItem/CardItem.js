@@ -61,7 +61,7 @@ export default class CardItem extends Component {
                 <div className="card-item-body">
                     {
                         (isDeleteInProgress || isUpdateInProgress) && (
-                            <div className="d-flex align-items-center justify-content-center h-230">
+                            <div className="d-flex align-items-center justify-content-center h-218">
                                 <Loader 
                                     type="Bars"
                                     color="#00BFFF"
