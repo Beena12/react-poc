@@ -17,9 +17,9 @@ const fetchCustomerLoading = () => ({
     type: FETCH_CUSTOMER_LOADING
 });
 
-const fetchCustomerSuccess = ( customerName ) => ({
+const fetchCustomerSuccess = ( customer ) => ({
     type: FETCH_CUSTOMER_SUCCESS,
-    payload: customerName
+    payload: customer
 });
 
 const fetchCustomerError = () => ({
@@ -28,20 +28,21 @@ const fetchCustomerError = () => ({
 
 
 export const fetchCustomer = ( reqData ) => {
-    return ( dispatch => {
+    return ((dispatch, getState) => {
         dispatch( fetchCustomerLoading() );
 
         return fetchCustomerAPI( reqData )
 	        .then( response => {
                 if( response.status === "200" && response.data ) {
-                    const customerName = response.data.name;
+                    const customer = response.data;
                     const customerId = response.data._id;
                     const orderReqObj = {
-                        customerId: customerId
+                        customerId: customerId,
+                        sortBy: getState().order.currentOrderBy.value
                     };
 
                     dispatch( fetchOrderList( orderReqObj ));
-                    dispatch( fetchCustomerSuccess( customerName ));
+                    dispatch( fetchCustomerSuccess( customer ));
                 } else {
                     fetchCustomerError();
                 }

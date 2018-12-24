@@ -16,6 +16,8 @@ import {
     UPDATE_ORDER_LINE_ITEM_SUCCESS,
     UPDATE_ORDER_LINE_ITEM_ERROR,
 
+    CHANGE_CURRENT_ORDERS_SORTING,
+
     ADD_ORDER_LINE_ITEM_SUCCESS,
 
     SET_CURRENT_SELECTED_ORDER_ID,
@@ -24,6 +26,8 @@ import {
 
     RESET_ORDER_LIST_STATE,
 } from "./../actions/order";
+
+import { sortingOptions } from './../components/Orders/OrdersTable/staticData';
 
 const initialState = {
     orderList:  [],
@@ -36,6 +40,8 @@ const initialState = {
     showOrderLineItems: false,
     isOrderLineItemsLoading: false,
     orderLineItems: [],
+
+    currentOrderBy: sortingOptions[0]
 };
 
 export const orderReducer = ( state = initialState, action ) => {
@@ -164,6 +170,12 @@ export const orderReducer = ( state = initialState, action ) => {
         case ADD_ORDER_LINE_ITEM_SUCCESS:
             return {
                 ...state
+            };
+
+        case CHANGE_CURRENT_ORDERS_SORTING:
+            return {
+                ...state,
+                currentOrderBy: action.payload
             };
 
         case SET_CURRENT_SELECTED_ORDER_ID:

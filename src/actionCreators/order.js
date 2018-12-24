@@ -19,6 +19,8 @@ import {
     UPDATE_ORDER_LINE_ITEM_SUCCESS,
     UPDATE_ORDER_LINE_ITEM_ERROR,
 
+    CHANGE_CURRENT_ORDERS_SORTING,
+
     SET_CURRENT_SELECTED_ORDER_ID,
 
     HIDE_ORDER_LINE_ITEMS_STATE,
@@ -175,6 +177,27 @@ export const deleteOrderLineItem = ( reqData ) => {
         });
     });
 };
+
+const changeCurrentOrdersSorting = (selectedOption) => ({
+    type: CHANGE_CURRENT_ORDERS_SORTING,
+    payload: selectedOption
+});
+
+export const changeOrdersSorting = ( selectedOption ) => {
+    return ((dispatch, getState) => {
+        dispatch( changeCurrentOrdersSorting(selectedOption) );
+
+        const customerId = getState().header.customerId;
+        if ( customerId ) {
+            const orderReqObj = {
+                customerId: customerId,
+                sortBy: selectedOption.value
+            };
+    
+            dispatch( fetchOrderList( orderReqObj ));
+        }
+    });
+}
 
 export const hideOrderLineItems = () => ({
     type: HIDE_ORDER_LINE_ITEMS_STATE
