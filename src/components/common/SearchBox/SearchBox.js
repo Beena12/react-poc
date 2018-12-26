@@ -17,6 +17,12 @@ export default class SearchBox extends Component {
 		});
 	}
 
+	onSearchboxEnter = ( e ) => {
+		if( e.key === 'Enter' ) {
+			this.handleSearchClick();
+		}
+	}
+
 	handleSearchClick = () => {
 		const searchValue = this.state.searchValue;
 		if( searchValue ) {
@@ -36,7 +42,7 @@ export default class SearchBox extends Component {
 					placeholder="Search..." 
 					value={ searchValue } 
 					onChange={ this.handleSearchInputChange } 
-					onKeyPress={ this.handleSearchClick }
+					onKeyPress={ this.onSearchboxEnter }
 				/>
 				<InputGroupAddon addonType="append">
 					<Button color="primary" onClick={ this.handleSearchClick } disabled = {searchDisabled}>
