@@ -3,6 +3,10 @@ import {
     FETCH_ORDER_LIST_SUCCESS,
     FETCH_ORDER_LIST_ERROR,
 
+    FETCH_MORE_ORDER_LIST_LOADING,
+    FETCH_MORE_ORDER_LIST_SUCCESS,
+    FETCH_MORE_ORDER_LIST_ERROR,
+
     FETCH_ORDER_LINE_ITEMS_LOADING,
     FETCH_ORDER_LINE_ITEMS_SUCCESS,
     FETCH_ORDER_LINE_ITEMS_ERROR,
@@ -36,6 +40,8 @@ import {
     updateOrderLineItemAPI
 } from './../apis/order';
 
+import { DEFAULT_PAGE_SIZE } from './../constants';
+
 const fetchOrderListLoading = () => ({
     type: FETCH_ORDER_LIST_LOADING
 });
@@ -59,6 +65,33 @@ export const fetchOrderList = ( reqData ) => {
         })
         .catch( error => {
             dispatch(fetchOrderListError());
+        });
+    });
+}
+
+const fetchMoreOrderListLoading = () => ({
+    type: FETCH_MORE_ORDER_LIST_LOADING
+});
+
+const fetchMoreOrderListSuccess = ( orderList ) => ({
+    type: FETCH_MORE_ORDER_LIST_SUCCESS,
+    payload: orderList
+});
+
+const fetchMoreOrderListError = () => ({
+    type: FETCH_MORE_ORDER_LIST_ERROR
+});
+
+export const fetchMoreOrderList = ( reqData ) => {
+    return ( dispatch => {
+        dispatch( fetchMoreOrderListLoading() );
+        
+        return fetchOrderListAPI( reqData )
+        .then( response => {
+            dispatch(fetchMoreOrderListSuccess( response.data ));
+        })
+        .catch( error => {
+            dispatch(fetchMoreOrderListError());
         });
     });
 }
@@ -191,7 +224,9 @@ export const changeOrdersSorting = ( selectedOption ) => {
         if ( customerId ) {
             const orderReqObj = {
                 customerId: customerId,
-                sortBy: selectedOption.value
+                sortBy: selectedOption.value,
+                page: 0,
+                count: DEFAULT_PAGE_SIZE
             };
     
             dispatch( fetchOrderList( orderReqObj ));

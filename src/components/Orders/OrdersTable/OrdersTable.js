@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 
-import VirtualTable from "./../../common/Table/VirtualTable";
+import InfinteScrollTable from "../../common/Table/InfiniteScrollTable";
 
-import { fetchOrderLineItems } from "./../../../actionCreators/order";
+import { fetchOrderLineItems, fetchMoreOrderList } from "./../../../actionCreators/order";
 
 import { ordersTableColumns } from "./staticData";
 
+import { DEFAULT_PAGE_SIZE } from "./../../../constants";
 
 class OrdersTable extends Component {
     state = {
@@ -27,15 +28,29 @@ class OrdersTable extends Component {
         });
         this.props.fetchOrderLineItems( rowData._id );
     }
+
+    loadMoreOrders = ( startIndex, stopIndex ) => {
+        const { currentCustomerId, currentOrderBy, fetchMoreOrderList} = this.props;
+        const page = startIndex === 0 ? 0 : startIndex/DEFAULT_PAGE_SIZE;
+        const orderReqObj = {
+            customerId: currentCustomerId,
+            sortBy: currentOrderBy.value,
+            count: DEFAULT_PAGE_SIZE,
+            page: page
+        };
+
+        return fetchMoreOrderList( orderReqObj );
+    }
     
     render() {
         const { height, width, orders } = this.props;
         const { selectedRowIndex } = this.state;
     
         return (
-            <VirtualTable
+            <InfinteScrollTable
                 columns = { ordersTableColumns }
                 data = { orders }
+                totalRowCount = {200}
                 width = { width }
                 height = { height }
                 noRowsRenderer = { this.noRowsRenderer }
@@ -44,16 +59,20 @@ class OrdersTable extends Component {
                 selectedRowClass = "order-table-selected-row"
                 selectedRowIndex = { selectedRowIndex }
                 onRowClick = { this.handleRowClick }
+                loadMoreOrders = { this.loadMoreOrders }
             />
         );
     }
 }
 
 const mapStateToProps = ( state ) => ({
-    orders: state.order.orderList
+    orders: state.order.orderList,
+    currentCustomerId: state.header.customerId,
+    currentOrderBy: state.order.currentOrderBy
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
+    fetchMoreOrderList: ( reqData ) => dispatch( fetchMoreOrderList( reqData )),
     fetchOrderLineItems: ( reqData ) => dispatch( fetchOrderLineItems( reqData ))
 });
 

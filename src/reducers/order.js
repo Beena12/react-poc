@@ -4,6 +4,10 @@ import {
     FETCH_ORDER_LIST_SUCCESS,
     FETCH_ORDER_LIST_ERROR,
 
+    FETCH_MORE_ORDER_LIST_LOADING,
+    FETCH_MORE_ORDER_LIST_SUCCESS,
+    FETCH_MORE_ORDER_LIST_ERROR,
+
     FETCH_ORDER_LINE_ITEMS_LOADING,
     FETCH_ORDER_LINE_ITEMS_SUCCESS,
     FETCH_ORDER_LINE_ITEMS_ERROR,
@@ -66,6 +70,14 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false
+            };
+
+        case FETCH_MORE_ORDER_LIST_SUCCESS:
+            const newOrderList = [...state.orderList, ...action.payload ];
+            return {
+                ...state,
+                orderList: newOrderList,  
+                rowCount: newOrderList.length,
             };
 
         case FETCH_ORDER_LINE_ITEMS_LOADING:
