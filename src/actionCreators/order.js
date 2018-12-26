@@ -46,9 +46,12 @@ const fetchOrderListLoading = () => ({
     type: FETCH_ORDER_LIST_LOADING
 });
 
-const fetchOrderListSuccess = ( orderList ) => ({
+const fetchOrderListSuccess = ( orderListResponse ) => ({
     type: FETCH_ORDER_LIST_SUCCESS,
-    payload: orderList
+    payload: {
+        orderList: orderListResponse.orders,
+        totalRecords: orderListResponse.totalRecords
+    }
 });
 
 const fetchOrderListError = () => ({
@@ -73,9 +76,12 @@ const fetchMoreOrderListLoading = () => ({
     type: FETCH_MORE_ORDER_LIST_LOADING
 });
 
-const fetchMoreOrderListSuccess = ( orderList ) => ({
+const fetchMoreOrderListSuccess = ( orderListResponse ) => ({
     type: FETCH_MORE_ORDER_LIST_SUCCESS,
-    payload: orderList
+    payload: {
+        orderList: orderListResponse.orders,
+        totalRecords: orderListResponse.totalRecords
+    }
 });
 
 const fetchMoreOrderListError = () => ({

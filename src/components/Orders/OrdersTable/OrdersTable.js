@@ -43,14 +43,14 @@ class OrdersTable extends Component {
     }
     
     render() {
-        const { height, width, orders } = this.props;
+        const { height, width, orders, totalRowCount } = this.props;
         const { selectedRowIndex } = this.state;
     
         return (
             <InfinteScrollTable
                 columns = { ordersTableColumns }
                 data = { orders }
-                totalRowCount = {200}
+                totalRowCount = {totalRowCount}
                 width = { width }
                 height = { height }
                 noRowsRenderer = { this.noRowsRenderer }
@@ -67,6 +67,7 @@ class OrdersTable extends Component {
 
 const mapStateToProps = ( state ) => ({
     orders: state.order.orderList,
+    totalRowCount: state.order.totalRowCount,
     currentCustomerId: state.header.customerId,
     currentOrderBy: state.order.currentOrderBy
 });

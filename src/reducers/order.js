@@ -35,7 +35,7 @@ import { sortingOptions } from './../components/Orders/OrdersTable/staticData';
 
 const initialState = {
     orderList:  [],
-    rowCount: 0,
+    totalRowCount: 0,
     isOrderListLoading: false,
     currentSelectedOrderId: null,
     
@@ -61,8 +61,8 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false,
-                orderList: action.payload,  
-                rowCount: action.payload.length,              
+                orderList: action.payload.orderList,  
+                totalRowCount: action.payload.totalRecords,              
                 currentSelectedOrderId: null
             };
 
@@ -73,11 +73,11 @@ export const orderReducer = ( state = initialState, action ) => {
             };
 
         case FETCH_MORE_ORDER_LIST_SUCCESS:
-            const newOrderList = [...state.orderList, ...action.payload ];
+            const newOrderList = [...state.orderList, ...action.payload.orderList ];
             return {
                 ...state,
                 orderList: newOrderList,  
-                rowCount: newOrderList.length,
+                totalRowCount: action.payload.totalRecords,
             };
 
         case FETCH_ORDER_LINE_ITEMS_LOADING:
