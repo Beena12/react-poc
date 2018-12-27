@@ -5,11 +5,10 @@ import Select from './../../common/Dropdown/DropDown';
 import OrdersTable from "./OrdersTable";
 
 import { sortingOptions } from "./staticData";
+import { MIN_TABLE_HEIGHT } from "./../../../constants";
 import { changeOrdersSorting } from "./../../../actionCreators/order";
 
 import  './ordersTable.scss';
-
-const MIN_TABLE_HEIGHT = 200;
 
 class OrdersTableWrapper extends Component {
     state = {
