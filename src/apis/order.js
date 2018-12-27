@@ -1,6 +1,6 @@
 
 export const fetchOrderListAPI = ( reqData ) => { 
-    const url = `/api/orders/?customer=${ reqData.customerId }&sort_by=${ reqData.sortBy}`;
+    const url = `/api/orders/?customer=${ reqData.customerId }&sort_by=${ reqData.sortBy}&page=${reqData.page}&count=${reqData.count}`;
     
     return fetch( url )
             .then( response => response.json());

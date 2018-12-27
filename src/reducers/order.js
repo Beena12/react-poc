@@ -4,6 +4,10 @@ import {
     FETCH_ORDER_LIST_SUCCESS,
     FETCH_ORDER_LIST_ERROR,
 
+    FETCH_MORE_ORDER_LIST_LOADING,
+    FETCH_MORE_ORDER_LIST_SUCCESS,
+    FETCH_MORE_ORDER_LIST_ERROR,
+
     FETCH_ORDER_LINE_ITEMS_LOADING,
     FETCH_ORDER_LINE_ITEMS_SUCCESS,
     FETCH_ORDER_LINE_ITEMS_ERROR,
@@ -31,7 +35,7 @@ import { sortingOptions } from './../components/Orders/OrdersTable/staticData';
 
 const initialState = {
     orderList:  [],
-    rowCount: 0,
+    totalRowCount: 0,
     isOrderListLoading: false,
     currentSelectedOrderId: null,
     
@@ -57,8 +61,8 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false,
-                orderList: action.payload,  
-                rowCount: action.payload.length,              
+                orderList: action.payload.orderList,  
+                totalRowCount: action.payload.totalRecords,              
                 currentSelectedOrderId: null
             };
 
@@ -66,6 +70,14 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isOrderListLoading: false
+            };
+
+        case FETCH_MORE_ORDER_LIST_SUCCESS:
+            const newOrderList = [...state.orderList, ...action.payload.orderList ];
+            return {
+                ...state,
+                orderList: newOrderList,  
+                totalRowCount: action.payload.totalRecords,
             };
 
         case FETCH_ORDER_LINE_ITEMS_LOADING:
@@ -108,7 +120,7 @@ export const orderReducer = ( state = initialState, action ) => {
             }
 
         case DELETE_ORDER_LINE_ITEM_SUCCESS:
-            const deleteOrderItemId = action.payload.deleteOrderItemId;
+            const deleteOrderItemId = action.payload;
             return {
                 ...state,
                 orderLineItems: state.orderLineItems.filter( lineItem => lineItem._id !== deleteOrderItemId )

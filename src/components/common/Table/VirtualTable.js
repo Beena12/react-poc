@@ -5,20 +5,19 @@ import AutoSizedTable from './AutoSizedTable';
 
 export default function VirtualTable( props ) {
     const { 
-            columns, 
-            data, 
-            noRowsRenderer, 
-            height, 
-            width, 
-            headerRowClass, 
-            evenRowClass, 
-            oddRowClass ,
-            onRowClick,
-            selectedRowIndex,
-            selectedRowClass
-        } = props;
+        columns, 
+        data, 
+        noRowsRenderer, 
+        height, 
+        width, 
+        onRowClick,
+        registerChildRef,
+        onRowsRendered
+    } = props;
 
-    const getRowClassName = ( row ) => {
+    function getRowClassName( row ) {
+        const {headerRowClass, selectedRowIndex, selectedRowClass, evenRowClass, oddRowClass} = props;
+
         const { index } = row;
         if( index === -1){
             return headerRowClass;
@@ -46,6 +45,9 @@ export default function VirtualTable( props ) {
             rowClassName    = { getRowClassName }
             gridClassName   = 'no-outline'
             onRowClick      = { onRowClick }
+
+            registerChildRef = {registerChildRef}
+            onRowsRendered = {onRowsRendered}
         >
             {
                 columns.map( column => (

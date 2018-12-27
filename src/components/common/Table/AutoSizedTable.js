@@ -13,11 +13,26 @@ export default function AutoSizedTable( props ) {
         <div style={{width: props.width, height: props.height}} >
             <AutoSizer>
                 {({ height, width }) => {
-                    const newProps = {
-                        ...props,
-                        height : height,
-                        width  : width
-                    };
+                    let newProps;
+                    if( props.registerChildRef ) {
+                        /** This is for infiniteLoader Table */
+                        newProps = {
+                            ...props,
+                            ref : props.registerChildRef,
+                            height : height,
+                            width  : width
+                        };
+                    }
+                    else {
+                        /** This is for normal virtualized table */
+                        newProps = {
+                            ...props,
+                            height : height,
+                            width  : width
+                        };
+                    }
+                    
+
                     return (
                         <Table {...newProps}>
                             { props.children }

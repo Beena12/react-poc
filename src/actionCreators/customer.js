@@ -13,6 +13,8 @@ import {
     fetchOrderList,
 } from './order';
 
+import { DEFAULT_PAGE_SIZE } from './../constants';
+
 const fetchCustomerLoading = () => ({
     type: FETCH_CUSTOMER_LOADING
 });
@@ -38,7 +40,9 @@ export const fetchCustomer = ( reqData ) => {
                     const customerId = response.data._id;
                     const orderReqObj = {
                         customerId: customerId,
-                        sortBy: getState().order.currentOrderBy.value
+                        sortBy: getState().order.currentOrderBy.value,
+                        page: 0,
+                        count: DEFAULT_PAGE_SIZE
                     };
 
                     dispatch( fetchOrderList( orderReqObj ));
