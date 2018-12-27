@@ -91,7 +91,8 @@ class OrdersTableWrapper extends Component {
 }
 
 const mapStateToProps = ( state ) => ({
-    orderBy: state.order.currentOrderBy
+    orderBy: state.order.currentOrderBy,
+    showLineItemsPanel: state.order.showLineItemsPanel
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
