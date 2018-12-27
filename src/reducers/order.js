@@ -120,7 +120,7 @@ export const orderReducer = ( state = initialState, action ) => {
             }
 
         case DELETE_ORDER_LINE_ITEM_SUCCESS:
-            const deleteOrderItemId = action.payload.deleteOrderItemId;
+            const deleteOrderItemId = action.payload;
             return {
                 ...state,
                 orderLineItems: state.orderLineItems.filter( lineItem => lineItem._id !== deleteOrderItemId )

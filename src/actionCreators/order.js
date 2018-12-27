@@ -209,7 +209,7 @@ export const deleteOrderLineItem = ( reqData ) => {
         dispatch( deleteOrderLineItemLoading( reqData.orderLineItemId ) );
         return deleteOrderLineItemAPI( reqData )
         .then( response  => {
-            dispatch( deleteOrderLineItemSuccess( response ));
+            dispatch( deleteOrderLineItemSuccess( response.data ));
         })
         .catch( error => {
             dispatch( deleteOrderLineItemError( reqData.orderLineItemId ));
