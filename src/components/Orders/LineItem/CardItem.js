@@ -21,11 +21,10 @@ export default class CardItem extends Component {
             const inputValue = this.unitsInputElm.current.value;
             this.props.onUpdateClick( inputValue );
         }
-        else {
-            this.setState({
-                isEditMode: true
-            });
-        }
+        
+        this.setState({
+            isEditMode: !this.state.isEditMode
+        });
         
     }
 

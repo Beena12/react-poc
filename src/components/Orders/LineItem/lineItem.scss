@@ -47,6 +47,9 @@ $master-lineItem-searchbox-height: 50px;
             height: auto;
             min-height: 250px;
         }
+        .card-item:last-child {
+            border-bottom: 1px solid #d4d4d4;
+        }
         .card-item-header {
             height: 30px;
             background-color: #d4d4d4;

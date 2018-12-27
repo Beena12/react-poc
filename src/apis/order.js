@@ -37,13 +37,13 @@ export const deleteOrderLineItemAPI = ( reqData ) => {
 }
 
 export const updateOrderLineItemAPI = ( reqData ) => {
-    const url = `/api/orderitems/?itemId=${ reqData.orderLineItemId }&orderId=${ reqData.orderId }`;
+    const url = `/api/orderitems/${ reqData.orderLineItemId }`;
     const reqObj = {
         itemQty: reqData.itemQty
     };
 
     return fetch( url, {
-                method: 'PUT',
+                method: 'PATCH',
                 body: JSON.stringify(reqObj),
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
