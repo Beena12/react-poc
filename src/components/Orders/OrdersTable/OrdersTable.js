@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
+import Loader from 'react-loader-spinner';
 
 import InfinteScrollTable from "../../common/Table/InfiniteScrollTable";
 
@@ -43,24 +44,42 @@ class OrdersTable extends Component {
     }
     
     render() {
-        const { height, width, orders, totalRowCount } = this.props;
+        const { height, width, orders, totalRowCount, isOrderListLoading } = this.props;
         const { selectedRowIndex } = this.state;
     
         return (
-            <InfinteScrollTable
-                columns = { ordersTableColumns }
-                data = { orders }
-                totalRowCount = {totalRowCount}
-                width = { width }
-                height = { height }
-                noRowsRenderer = { this.noRowsRenderer }
-                headerRowClass = "order-table-header"
-                evenRowClass = "order-table-even-row"
-                selectedRowClass = "order-table-selected-row"
-                selectedRowIndex = { selectedRowIndex }
-                onRowClick = { this.handleRowClick }
-                loadMoreOrders = { this.loadMoreOrders }
-            />
+            <>
+            {
+                isOrderListLoading && (
+                    <div className="d-flex align-items-center justify-content-center h-100">
+                        <Loader 
+                            type="Grid"
+                            color="#00BFFF"
+                            height="50"	
+                            width="50"
+                        />
+                    </div>
+                )
+            }
+            {
+                !isOrderListLoading && (
+                    <InfinteScrollTable
+                        columns = { ordersTableColumns }
+                        data = { orders }
+                        totalRowCount = {totalRowCount}
+                        width = { width }
+                        height = { height }
+                        noRowsRenderer = { this.noRowsRenderer }
+                        headerRowClass = "order-table-header"
+                        evenRowClass = "order-table-even-row"
+                        selectedRowClass = "order-table-selected-row"
+                        selectedRowIndex = { selectedRowIndex }
+                        onRowClick = { this.handleRowClick }
+                        loadMoreOrders = { this.loadMoreOrders }
+                    />
+                )
+            }
+            </>
         );
     }
 }
@@ -69,7 +88,8 @@ const mapStateToProps = ( state ) => ({
     orders: state.order.orderList,
     totalRowCount: state.order.totalRowCount,
     currentCustomerId: state.header.customerId,
-    currentOrderBy: state.order.currentOrderBy
+    currentOrderBy: state.order.currentOrderBy,
+    isOrderListLoading: state.order.isOrderListLoading
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
