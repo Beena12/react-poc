@@ -14,7 +14,6 @@ class OrderLineItemList extends Component {
     handleUpdateClick = ( itemQty, lineItem ) => {
         const updateReqData = {
             orderLineItemId: lineItem._id,
-            orderId: this.props.currOrderId,
             itemQty: itemQty
         };
         this.props.updateOrderLineItem( updateReqData );

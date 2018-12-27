@@ -144,13 +144,14 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 orderLineItems: state.orderLineItems.map( lineItem => {
+                    let newLineItem = {...lineItem};
                     if( lineItem._id === action.payload ) {
-                        lineItem = {
-                            ...lineItem,
+                        newLineItem = {
+                            ...newLineItem,
                             isUpdateInProgress: true
                         };
                     }
-                    return lineItem;
+                    return newLineItem;
                 })
             };
 
@@ -158,10 +159,15 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 orderLineItems: state.orderLineItems.map( lineItem => {
+                    let newLineItem = {...lineItem};
                     if( lineItem._id === action.payload._id ) {
-                        lineItem = action.payload
+                        newLineItem = {
+                            ...newLineItem,
+                            isUpdateInProgress: false,
+                            itemQty: action.payload.itemQty
+                        };
                     }
-                    return lineItem;
+                    return newLineItem;
                 })
             }
 
@@ -169,13 +175,14 @@ export const orderReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 orderLineItems: state.orderLineItems.map( lineItem => {
+                    let newLineItem = {...lineItem};
                     if( lineItem._id === action.payload ) {
-                        lineItem = {
-                            ...lineItem,
+                        newLineItem = {
+                            ...newLineItem,
                             isUpdateInProgress: false
                         };
                     }
-                    return lineItem;
+                    return newLineItem;
                 })
             }
 
