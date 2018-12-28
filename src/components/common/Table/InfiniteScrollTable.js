@@ -26,7 +26,7 @@ export default function InfiniteScrollTable( props ) {
     }
 
     function _loadMoreRows({startIndex, stopIndex}) {
-        return props.loadMoreOrders( startIndex, stopIndex );
+        return props.loadMoreRows( startIndex, stopIndex );
     } 
 
     return (

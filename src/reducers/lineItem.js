@@ -75,6 +75,6 @@ export const lineItemReducer = ( state = initialState, action ) => {
             }
 
         default:
-            return initialState;
+            return state;
     }
 }

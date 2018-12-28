@@ -75,7 +75,7 @@ class OrdersTable extends Component {
                         selectedRowClass = "order-table-selected-row"
                         selectedRowIndex = { selectedRowIndex }
                         onRowClick = { this.handleRowClick }
-                        loadMoreOrders = { this.loadMoreOrders }
+                        loadMoreRows = { this.loadMoreOrders }
                     />
                 )
             }
