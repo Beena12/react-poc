@@ -6,10 +6,17 @@ import { Row, Col } from 'reactstrap';
 import SearchBox from "../../common/SearchBox/SearchBox";
 import { fetchMasterLineItems } from "../../../actionCreators/lineItem";
 
+import { DEFAULT_PAGE_SIZE } from "./../../../constants";
+
 
 class MasterLineItemsList extends Component {
     handleLineItemSearch = ( searchValue ) => {
-        this.props.fetchMasterLineItems( searchValue );
+        const reqData = {
+            searchValue: searchValue,
+            page: 0,
+            count: DEFAULT_PAGE_SIZE
+        };
+        this.props.fetchMasterLineItems( reqData );
     }
 
     render() {
@@ -65,7 +72,7 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-    fetchMasterLineItems: ( searchValue ) => dispatch( fetchMasterLineItems( searchValue ) )
+    fetchMasterLineItems: ( reqData ) => dispatch( fetchMasterLineItems( reqData ) )
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( MasterLineItemsList );
