@@ -6,6 +6,7 @@ import { Row, Col } from 'reactstrap';
 import SearchBox from "../../common/SearchBox/SearchBox";
 
 import InfiniteScrollList from "./../../common/List/InfiniteScrollList";
+import { CellMeasurer, CellMeasurerCache } from 'react-virtualized';
 
 import { fetchMasterLineItems, fetchMoreMasterLineItems } from "../../../actionCreators/lineItem";
 
@@ -15,7 +16,11 @@ import { DEFAULT_PAGE_SIZE } from "./../../../constants";
 class MasterLineItemsList extends Component {
     state = {
         searchValue: ''
-    }
+    };
+
+    cache = new CellMeasurerCache({
+        fixedWidth: true
+    });
 
     handleLineItemSearch = ( searchValue ) => {
         this.setState({
@@ -41,27 +46,35 @@ class MasterLineItemsList extends Component {
         return fetchMoreMasterLineItems( orderReqObj );
     }
 
-    renderRow = ({ index, key, style }, selectedLineItemId) => {
+    renderRow = ({ index, key, style, parent }, selectedLineItemId) => {
         const { masterLineItemList, onItemSelect } = this.props;
         const lineItem = masterLineItemList[ index ];
         return (
-            <div style={style} className="mb-3" key={ key } onClick={(e) => onItemSelect( e, lineItem._id ) }>
-                <Row noGutters={true}>
-                    <Col sm="1"></Col>
-                    <Col sm="4"  className="field-label">Item Name</Col>
-                    <Col sm="7"  className="field-label">Description</Col>
-                </Row>
-                <Row noGutters={true}>
-                    <Col sm="1" className="pl-2">
-                        <input type="radio"
-                            checked={ lineItem._id === selectedLineItemId } 
-                            onChange={(e) => onItemSelect( e, lineItem._id ) }
-                        />
-                    </Col>
-                    <Col sm="4" className="field-value">{ lineItem.name }</Col>
-                    <Col sm="7" className="field-value">{ lineItem.description }</Col>
-                </Row>
-            </div>
+            <CellMeasurer 
+                key={key}
+                cache={this.cache}
+                parent={parent}
+                columnIndex={0}
+                rowIndex={index}
+            >
+                <div style={style} className="pb-4" key={ key } onClick={(e) => onItemSelect( e, lineItem._id ) }>
+                    <Row noGutters={true}>
+                        <Col sm="1"></Col>
+                        <Col sm="4"  className="field-label">Item Name</Col>
+                        <Col sm="7"  className="field-label">Description</Col>
+                    </Row>
+                    <Row noGutters={true}>
+                        <Col sm="1" className="pl-2">
+                            <input type="radio"
+                                checked={ lineItem._id === selectedLineItemId } 
+                                onChange={(e) => onItemSelect( e, lineItem._id ) }
+                            />
+                        </Col>
+                        <Col sm="4" className="field-value">{ lineItem.name }</Col>
+                        <Col sm="7" className="field-value">{ lineItem.description }</Col>
+                    </Row>
+                </div>
+            </CellMeasurer>
         );
     }
 
@@ -90,9 +103,13 @@ class MasterLineItemsList extends Component {
                             <InfiniteScrollList
                                 list = { masterLineItemList }
                                 totalRowCount = {totalRowCount}
+                                selectedRow = {selectedLineItemId}
+
                                 rowRenderer = { this.renderRow }
                                 loadMoreRows = { this.loadMoreLineItems }
-                                selectedRow = {selectedLineItemId}
+                                
+                                deferredMeasurementCache={this.cache}
+                                rowHeight={this.cache.rowHeight}
                                 className = "pt-3"
                             />
                         )

@@ -11,7 +11,10 @@ export default function InfiniteScrollList( props ) {
         selectedRow,
 
         rowRenderer,
-        loadMoreRows
+        loadMoreRows,
+
+        deferredMeasurementCache,
+        rowHeight
     } = props;
 
     function _isRowLoaded({index}) {
@@ -38,10 +41,11 @@ export default function InfiniteScrollList( props ) {
                             height = { height }
                             width = { width }
                             rowCount = { list.length }
-                            rowHeight = {80}
+                            rowHeight = { rowHeight }
                             overscanRowCount = {3}
 
                             onRowsRendered = {onRowsRendered}
+                            deferredMeasurementCache = {deferredMeasurementCache}
                             rowRenderer = {( rowObj ) => rowRenderer( rowObj, selectedRow) }
                             className = { className }
                         />
