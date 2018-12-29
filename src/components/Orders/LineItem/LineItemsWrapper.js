@@ -9,6 +9,8 @@ import { addOrderLineItem } from "./../../../actionCreators/order";
 import { hideOrderLineItems } from "./../../../actionCreators/order";
 import { fetchMasterLineItems } from "../../../actionCreators/lineItem";
 
+import { DEFAULT_PAGE_SIZE } from "./../../../constants";
+
 import './lineItem.scss';
 
 class LineItemsWrapper extends Component {
@@ -32,7 +34,12 @@ class LineItemsWrapper extends Component {
                 selectedLineItemId: null // Before showing the master line-item list just making sure no item should be selected by default
             });
             hideOrderLineItems();
-            fetchMasterLineItems();
+            
+            const reqData = {
+                page: 0,
+                count: DEFAULT_PAGE_SIZE
+            };
+            fetchMasterLineItems( reqData );
         }
         else {
             /* Add an item to Order */
@@ -99,7 +106,7 @@ const mapStateToProps = ( state ) => ({
 
 const mapDispatchToProps = ( dispatch ) => ({
     hideOrderLineItems: () => { dispatch( hideOrderLineItems()) },
-    fetchMasterLineItems: () => { dispatch( fetchMasterLineItems()) },
+    fetchMasterLineItems: ( reqData ) => { dispatch( fetchMasterLineItems( reqData )) },
     addOrderLineItem: ( lineItem ) => { dispatch( addOrderLineItem( lineItem )) } 
 })
 

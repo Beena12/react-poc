@@ -2,7 +2,11 @@
 import { 
     FETCH_MASTER_LINE_ITEMS_LOADING,
     FETCH_MASTER_LINE_ITEMS_SUCCESS,
-    FETCH_MASTER_LINE_ITEMS_ERROR
+    FETCH_MASTER_LINE_ITEMS_ERROR,
+
+    FETCH_MORE_MASTER_LINE_ITEMS_LOADING,
+    FETCH_MORE_MASTER_LINE_ITEMS_SUCCESS,
+    FETCH_MORE_MASTER_LINE_ITEMS_ERROR,
 } from "./../actions/lineItem";
 
 import {
@@ -14,6 +18,7 @@ import {
 
 const initialState = {
     lineItemList: [], //mockedLineItemsList,
+    totalItemsCount: 0,
     isLineItemListLoading: false,
     showAddLineItemError: false
 }
@@ -29,7 +34,8 @@ export const lineItemReducer = ( state = initialState, action ) => {
         case FETCH_MASTER_LINE_ITEMS_SUCCESS:
             return {
                 ...state,
-                lineItemList: action.payload,
+                lineItemList: action.payload.items,
+                totalItemsCount: action.payload.totalRecords,
                 isLineItemListLoading: false
             };
 
@@ -37,6 +43,14 @@ export const lineItemReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 isLineItemListLoading: false
+            };
+
+        case FETCH_MORE_MASTER_LINE_ITEMS_SUCCESS:
+            const newLineItemList = [...state.lineItemList, ...action.payload.items]
+            return {
+                ...state,
+                lineItemList: newLineItemList,
+                totalItemsCount: action.payload.totalRecords
             };
 
         case ADD_ORDER_LINE_ITEM_LOADING:
@@ -61,6 +75,6 @@ export const lineItemReducer = ( state = initialState, action ) => {
             }
 
         default:
-            return initialState;
+            return state;
     }
 }

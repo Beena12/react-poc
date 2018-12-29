@@ -24,8 +24,9 @@ export default class SearchBox extends Component {
 	}
 
 	handleSearchClick = () => {
-		const searchValue = this.state.searchValue;
-		if( searchValue ) {
+		const {searchValue} = this.state;
+		const { allowEmptySearch } = this.props;
+		if( searchValue || allowEmptySearch ) {
 			this.props.onSearchClick( searchValue );
 		}
 	}
