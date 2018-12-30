@@ -1,44 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import './leftPanel.scss';
 
+import 'react-virtualized/styles.css';
 import { Button } from 'reactstrap'
 
-const divStyleClose = {
-    width: '60px',
-}
 
-const divStyleOpen = {
-    width: '120px',
-}
+class LeftPanel extends Component {
 
-
-export default class LeftPanel extends Component{
-    
-    constructor(props){
-    	super(props);
-	
-	    this.state = { 
-	        isOpen: false,
-	        divStyle: divStyleOpen
-    	}
-    }
+    state = { 
+        collapseLeftPanel: true
+	};		
 
 	toggleCollapse = () => {
-		if (this.state.isOpen) {
-			this.divStyle = divStyleOpen;
-		}
-		else {
-			this.divStyle = divStyleClose;
-		}
-
 		this.setState({
-            isOpen: !this.state.isOpen
+            collapseLeftPanel: !this.state.collapseLeftPanel
         });
+
+        console.log("collapseLeftPanel..", this.state.collapseLeftPanel);
+        console.log("panelWidth..", this.props.panelWidth);
 	}
 
-    render() {
+    render () {
 	    return (
-	 		<div style={this.divStyle}>
+	    	<div style = {{width: this.props.panelWidth}}>
 	 		<div className="left-panel">
 					<div className="site-logo"></div>
 		            <div className="bottom-nav">
@@ -51,8 +36,14 @@ export default class LeftPanel extends Component{
 								</Button>
 						</div>
 		            </div>
-	        </div>
-	        </div>
+		        </div>
+		     </div>
 	    );
 	}
 }
+
+const mapStateToProps = ( state ) => ({
+    collapseLeftPanel: state.collapseLeftPanel
+});
+
+export default connect( mapStateToProps, null )( LeftPanel );
