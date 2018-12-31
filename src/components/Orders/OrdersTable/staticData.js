@@ -3,11 +3,11 @@ import React from 'react';
 export const sortingOptions = [
     {
         text: "Most Recent",
-        value: "date-asc"
+        value: "date_dsc"
     }, 
     {
         text: "Oldest",
-        value: "date-desc"
+        value: "date_asc"
     }
 ];
 
