@@ -32,7 +32,7 @@ class LeftPanel extends Component {
 		        		</div>
 		        		<div>
 								<Button color="link" onClick={this.toggleCollapse}>
-									<i className="fa fa-angle-double-right  icon-white"></i>		
+									<i className="fa fa-angle-right  icon-white"></i>		
 								</Button>
 						</div>
 		            </div>
